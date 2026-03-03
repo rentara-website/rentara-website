@@ -3,8 +3,8 @@
 @section('content')
     <div class="hero-section-container mt-10 flex items-center justify-between px-14">
         <div class="hero-section-left">
-            <h1 class="text-[64px] font-bold w-[426px] leading-24">Premium Rental in Bali</h1>
-            <p class="w-[598px] mt-5 text-[24px] text-gray-500">
+            <h1 class="text-[64px] font-bold w-106.5 leading-24">Premium Rental in Bali</h1>
+            <p class="w-149.5 mt-5 text-[24px] text-gray-500">
                 Rent Cameras & Vehicles in Bali Easily and Safely Discover trusted camera and motorbike rentals in Bali from verified local providers — all in one convenient platform.
             </p>
             <button type="button" class="bg-[#0A4088] hover:bg-[#032d63] text-white font-bold py-2 px-4 rounded-full mt-5 flex items-center gap-2 transition duration-300 hover:cursor-pointer">
@@ -27,8 +27,8 @@
                 <img src="/images/Sandy_Gen-04_Single-081.png" alt="about us image" srcset="" width="405">
             </div>
             <div class="about-us-right">
-                <h1 class="text-white text-[64px] font-bold max-w-[725px]">All Your Bali Rental Needs in One Place</h1>
-                <p class="text-[#d1d1d1] text-[24px] mt-5 w-[757px] font-poppins">
+                <h1 class="text-white text-[64px] font-bold max-w-181.25">All Your Bali Rental Needs in One Place</h1>
+                <p class="text-[#d1d1d1] text-[24px] mt-5 w-189.25 font-poppins">
                     Rentara is a Bali rental that helps you find and book cameras, motorbikes, and content equipment from trusted local rental providers quickly and easily.
                 </p>
 
