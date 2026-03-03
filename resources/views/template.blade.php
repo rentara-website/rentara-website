@@ -10,7 +10,7 @@
 <body class="font-poppins">
     <nav>@include('navbar')</nav>
 
-    <main class="px-14">
+    <main class="">
         @yield('content')
     </main>
 
