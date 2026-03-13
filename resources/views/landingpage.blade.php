@@ -21,14 +21,14 @@
     </div>
 
     <div class="about-us-container bg-[#0A4088] mt-10 flex items-center justify-center">
-        <div class="about-us-wrapper px-14 py-10 flex items-center justify-between w-full">
+        <div class="about-us-wrapper px-14 py-10 grid-cols-2 grid w-full">
             <div class="about-us-left">
                 <img src="/images/Sandy_Gen-04_Single-081.png" alt="about us image" srcset="" width="405">
             </div>
             <div class="about-us-right">
                 <h1 class="text-white text-[64px] font-bold max-w-181.25">All Your Bali Rental Needs in One Place</h1>
                 <p class="text-[#d1d1d1] text-[24px] mt-5 w-189.25 font-poppins">
-                    Rentara is a Bali rental that helps you find and book cameras, motorbikes, and content equipment from trusted local rental providers quickly and easily.
+                    Rentara is a Bali platform to rent cameras and content gear, and connect with professional photographers and videographers.
                 </p>
 
                 <p class="text-[#fafafa] text-[24px] underline mt-5"> All rental options in one platform?</p>
@@ -238,7 +238,7 @@
     </div>
 
     <!-- Start Rent Section -->
-    <div class="start-rent mt-12 md:mt-20">
+    {{-- <div class="start-rent mt-12 md:mt-20">
         <div class="start-rent-wrapper px-6 sm:px-8 md:px-14 mx-auto max-w-6xl flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
             <div class="start-rent-left w-full md:w-1/2 order-2 md:order-1">
                 <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">Start Rent Now!</h1>
@@ -275,5 +275,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

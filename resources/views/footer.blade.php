@@ -1,4 +1,4 @@
-<div class="footer-container flex items-center justify-between px-14">
+<div class="footer-container flex items-center justify-between px-14 relative z-10">
 
     <div class="footer-logo">
         <img src="/images/Rentara-removebg-preview1.png" alt="" class="w-20">

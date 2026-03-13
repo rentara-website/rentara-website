@@ -7,3 +7,9 @@ Route::get('/', function () {
         "title" => "Home",
     ]);
 });
+
+Route::get("/products", function (){
+    return view('products.index', [
+        "title" => "Products",
+    ]);
+});
