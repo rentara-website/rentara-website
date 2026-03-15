@@ -17,7 +17,10 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "nama_produk" => $this->faker->word(),
+            "harga" => $this->faker->numberBetween(10000, 100000),
+            "deskripsi" => $this->faker->paragraph(),
+            "category_id" => \App\Models\Category::inRandomOrder()->first()?->id ?? 1,
         ];
     }
 }

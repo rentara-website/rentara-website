@@ -17,7 +17,8 @@ class ImageProductFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "image_path" => $this->faker->imageUrl(640, 480, "products", true),
+            "product_id" => random_int(1, 10),
         ];
     }
 }

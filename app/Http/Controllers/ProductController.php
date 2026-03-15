@@ -13,7 +13,48 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $query = Product::query()->with('category');
+        $products = $query->get();
+        
+        // Group produk berdasarkan kategori dan limit 4 per kategori
+        $groupedProducts = $products->groupBy('category.name')->map(function ($items) {
+            return $items->take(4);
+        });
+
+        return view("products.index", [
+            "title" => "Products",
+            "groupedProducts" => $groupedProducts,
+            "search" => null,
+        ]);
+    }
+
+    /**
+     * Search products by keyword.
+     */
+    public function search($keyword)
+    {
+        $search = urldecode($keyword);
+
+        $query = Product::query()->with('category');
+
+        if ($search) {
+            $query->where('nama_produk', 'like', '%' . $search . '%')
+                  ->orWhere('harga', 'like', '%' . $search . '%')
+                  ->orWhere('deskripsi', 'like', '%' . $search . '%');
+        }
+
+        $products = $query->get();
+        
+        // Group produk berdasarkan kategori dan limit 4 per kategori
+        $groupedProducts = $products->groupBy('category.name')->map(function ($items) {
+            return $items->take(4);
+        });
+
+        return view("products.index", [
+            "title" => "Products",
+            "groupedProducts" => $groupedProducts,
+            "search" => $search,
+        ]);
     }
 
     /**
