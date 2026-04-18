@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Tag;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
@@ -11,50 +14,53 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $query = Product::query()->with('category');
-        $products = $query->get();
-        
-        // Group produk berdasarkan kategori dan limit 4 per kategori
-        $groupedProducts = $products->groupBy('category.name')->map(function ($items) {
-            return $items->take(4);
-        });
+        $search = $request->query('search');
+        $categorySlug = $request->query('category');
+        $tagSlug = $request->query('tag');
 
-        return view("products.index", [
-            "title" => "Products",
-            "groupedProducts" => $groupedProducts,
-            "search" => null,
-        ]);
-    }
-
-    /**
-     * Search products by keyword.
-     */
-    public function search($keyword)
-    {
-        $search = urldecode($keyword);
-
-        $query = Product::query()->with('category');
+        $query = Product::query()->with(['category', 'tags']);
 
         if ($search) {
-            $query->where('nama_produk', 'like', '%' . $search . '%')
-                  ->orWhere('harga', 'like', '%' . $search . '%')
+            $query->where(function($q) use ($search) {
+                $q->where('nama_produk', 'like', '%' . $search . '%')
                   ->orWhere('deskripsi', 'like', '%' . $search . '%');
+            });
+        }
+
+        if ($request->filled('category')) {
+            $query->whereHas('category', function($q) use ($categorySlug) {
+                $q->where('slug', $categorySlug);
+            });
+        }
+
+        if ($request->filled('tag')) {
+            $query->whereHas('tags', function($q) use ($tagSlug) {
+                $q->where('slug', $tagSlug);
+            });
         }
 
         $products = $query->get();
         
-        // Group produk berdasarkan kategori dan limit 4 per kategori
-        $groupedProducts = $products->groupBy('category.name')->map(function ($items) {
-            return $items->take(4);
-        });
+        // Group products by category
+        $groupedProducts = $products->groupBy('category.name');
 
-        return view("products.index", [
+        $data = [
             "title" => "Products",
             "groupedProducts" => $groupedProducts,
+            "categories" => Category::all(),
+            "tags" => Tag::all(),
             "search" => $search,
-        ]);
+            "activeCategory" => $categorySlug,
+            "activeTag" => $tagSlug,
+        ];
+
+        if ($request->ajax()) {
+            return view("products.partials.grid", $data);
+        }
+
+        return view("products.index", $data);
     }
 
     /**
@@ -78,7 +84,14 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $product->load(['category', 'tags', 'portfolios']);
+        
+        $data = [
+            "title" => $product->nama_produk,
+            "product" => $product,
+        ];
+
+        return view("products.show", $data);
     }
 
     /**

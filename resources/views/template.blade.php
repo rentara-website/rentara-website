@@ -6,16 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rentara - {{$title}}</title>
     @vite('resources/css/app.css')
-    @ddfsnStyles
     @vite('resources/js/app.js')
 </head>
-<body class="font-poppins">
+<body class="font-poppins flex flex-col min-h-screen overflow-x-hidden">
     <nav>@include('navbar')</nav>
 
-    <main class="">
+    <main class="flex-grow">
         @yield('content')
     </main>
 
-    <footer class="border-t-2">@include('footer')</footer>
+    @include('footer')
 </body>
 </html>

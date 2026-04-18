@@ -1,88 +1,94 @@
 @extends('template')
 
 @section('content')
-
-    <div class="mt-10 px-14">
-        <div class="header z-10 relative">
-            
-            <div class="title-container mt-5">
-                <h1 class="font-extrabold text-[64px] text-center">What We Bring?</h1>
-                <p class="text-[24px] text-center w-4xl mx-auto mt-5">Making it easier to find and rent the gear and rides you need, whenever you need them.</p>
+    <div class="px-6 sm:px-8 md:px-10 lg:px-14 pb-16 lg:pb-32">
+        {{-- Header Section --}}
+        <div class="header z-10 relative mb-12">
+            <div class="title-container mt-4 sm:mt-6 lg:mt-8">
+                <h1 class="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-[#0A4088]">What We
+                    Bring?</h1>
+                <p
+                    class="text-lg sm:text-xl md:text-2xl text-center max-w-4xl mx-auto mt-4 sm:mt-6 lg:mt-8 text-gray-600 leading-relaxed">
+                    Making it easier to find and rent the gear you need, whenever you need them.
+                </p>
             </div>
-            
-            <form action="javascript:void(0);" method="GET" onsubmit="handleSearch(event)">
-                <div class="search-container mt-10">
-                    <div class="relative w-4xl mx-auto">
-                        <input type="search" name="search" id="search" placeholder="Search for products..." value="{{ $search ?? '' }}" class="border border-gray-300 rounded-full px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full shadow-md bg-white">
-                        <svg class="absolute left-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </div>
+
+            <form id="search-form" action="{{ url('/products') }}" method="GET" class="mt-10 sm:mt-12 lg:mt-14">
+                <div class="relative max-w-2xl mx-auto group">
+                    <input type="text" name="search" id="search-input"
+                        placeholder="Search for gear, cameras, or accessories..." value="{{ $search ?? '' }}"
+                        class="w-full pl-14 pr-12 py-4 rounded-2xl border-2 border-gray-100 focus:border-[#0A4088] focus:ring-0 shadow-lg transition-all duration-300 text-lg"
+                        autocomplete="off">
+                    <i data-lucide="search" class="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400"></i>
+
+                    {{-- JS Clear Button --}}
+                    <button type="button" id="clear-search"
+                        class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-500 transition-colors {{ !$search ? 'hidden' : '' }}">
+                        <i data-lucide="x-circle" class="w-6 h-6"></i>
+                    </button>
                 </div>
             </form>
-
-            <script>
-                function handleSearch(e) {
-                    e.preventDefault();
-                    const searchInput = document.getElementById('search').value;
-                    if (searchInput.trim()) {
-                        window.location.href = '/products/search/' + encodeURIComponent(searchInput);
-                    } else {
-                        window.location.href = '/products';
-                    }
-                }
-            </script>
         </div>
 
-        <div class="illustration absolute right-0 top-10">
-            <img src="/images/Group86.png" alt="">
-        </div>
-
-        <div class="illustration absolute left-0 bottom-0">
-            <img src="/images/Group85.png" alt="">
-        </div>
-
-        <div class="list-products z-10 relative my-10">
-
-            @foreach ($groupedProducts as $categoryName => $categoryProducts)
-                <div class="category bg-[#0A4088] rounded-lg p-5 w-60 text-center mb-10 flex items-center justify-center gap-3">
-                    <h3 class="font-bold text-white">{{ $categoryName }}</h3>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="size-6">
-                        <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                
-                <div class="card-wrapper grid grid-cols-4 gap-2 mb-10">
-                    @foreach ($categoryProducts as $product)
-                        <div class="card-container bg-[#EDEAEA] shadow-md rounded-lg p-5 max-w-sm mx-auto">
-                            <img src="/images/Rectangle24.png" alt="" class="rounded-lg ">
-                            <h2 class="text-[32px] font-bold uppercase">{{ $product->nama_produk }}</h2>
-                            <h3 class="text-[15px] text-slate-500 uppercase">{{ $product->deskripsi }}</h3>
-
-                            <div class="price flex items-center justify-between mt-4">
-
-                                <div>
-                                    <span class="text-[24px] font-bold text-[#0A4088]">Rp {{ number_format($product->harga, 0, ',', '.') }}</span>
-
-                                    <span class="text-[16px] text-gray-500 line-through ml-2">Rp 200.000</span>
-                                </div>
-
-                                <div>
-                                    <a href="https://wa.me/6281938092473?text=Halooo Saya tertarik menyewa {{ $product->nama_produk }} dari websitemu. Tolong berikan saya detail barangnya?" target="_blank">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="size-10 bg-green-500 rounded-full p-2 border-white border-2 cursor-pointer hover:bg-green-600 transition-colors">
-                                            <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-10 relative">
+            {{-- Filter Sidebar --}}
+            <aside class="w-full lg:w-72 flex-shrink-0">
+                <div class="lg:sticky lg:top-24 space-y-6 lg:space-y-8 mb-8 lg:mb-20">
+                    {{-- Categories --}}
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <i data-lucide="layers" class="w-5 h-5 text-[#0A4088]"></i> Categories
+                        </h3>
+                        <div class="flex flex-wrap lg:flex-col gap-2">
+                            <a href="{{ url('/products') . ($search ? '?search=' . $search : '') }}"
+                                data-url="{{ url('/products') . ($search ? '?search=' . $search : '') }}" data-cat-slug=""
+                                class="filter-link cat-link px-4 py-2.5 rounded-xl border bg-white text-gray-600 border-gray-200 hover:border-[#0A4088] hover:text-[#0A4088] transition-all duration-300 {{ !$activeCategory ? 'filter-active' : '' }}">
+                                All Categories
+                            </a>
+                            @foreach($categories as $category)
+                                <a href="{{ url('/products?category=' . $category->slug . ($search ? '&search=' . $search : '') . ($activeTag ? '&tag=' . $activeTag : '')) }}"
+                                    data-url="{{ url('/products?category=' . $category->slug . ($search ? '&search=' . $search : '') . ($activeTag ? '&tag=' . $activeTag : '')) }}"
+                                    data-cat-slug="{{ $category->slug }}"
+                                    class="filter-link cat-link px-4 py-2.5 rounded-xl border bg-white text-gray-600 border-gray-200 hover:border-[#0A4088] hover:text-[#0A4088] transition-all duration-300 {{ $activeCategory == $category->slug ? 'filter-active' : '' }}">
+                                    {{ $category->name }}
+                                </a>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+
+                    {{-- Tags --}}
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <i data-lucide="tag" class="w-5 h-5 text-[#0A4088]"></i> Popular Tags
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($tags as $tag)
+                                <a href="{{ url('/products?tag=' . $tag->slug . ($search ? '&search=' . $search : '') . ($activeCategory ? '&category=' . $activeCategory : '')) }}"
+                                    data-url="{{ url('/products?tag=' . $tag->slug . ($search ? '&search=' . $search : '') . ($activeCategory ? '&category=' . $activeCategory : '')) }}"
+                                    data-tag-slug="{{ $tag->slug }}"
+                                    class="filter-link tag-link px-3 py-1.5 rounded-lg text-sm border bg-[#0A4088]/5 text-[#0A4088] border-transparent hover:bg-[#0A4088]/10 transition-all duration-300 {{ $activeTag == $tag->slug ? 'filter-active' : '' }}">
+                                    #{{ $tag->name }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- Reset --}}
+                    @if($search || $activeCategory || $activeTag)
+                        <div id="reset-container" class="pt-4 border-t border-gray-100">
+                            <a href="{{ url('/products') }}" data-url="{{ url('/products') }}"
+                                class="filter-link flex items-center justify-center gap-2 w-full py-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors font-semibold">
+                                <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset All Filters
+                            </a>
+                        </div>
+                    @endif
                 </div>
-            @endforeach
+            </aside>
 
+            {{-- Product Grid Container for AJAX --}}
+            <main id="product-list-container" class="flex-1 transition-opacity duration-300">
+                @include('products.partials.grid')
+            </main>
         </div>
-
     </div>
-    
 @endsection

@@ -18,12 +18,37 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // 1. Create Categories
+        \App\Models\Category::factory(3)->create();
 
-        Category::factory(3)->create();
+        // 2. Create Tags
+        $this->call(TagSeeder::class);
 
-        Product::factory(10)->create();
+        // 3. Create 20 Products
+        $products = \App\Models\Product::factory(20)->create();
 
-        ImageProduct::factory(10)->create();
+        // 4. Attach Tags ONLY to products with ID 11 to 20
+        $tags = \App\Models\Tag::all();
+        
+        $targetProducts = $products->whereBetween('id', [11, 20]);
+        
+        foreach ($targetProducts as $product) {
+            $randomTags = $tags->random(rand(1, 3))->pluck('id');
+            $product->tags()->attach($randomTags);
+        }
+
+        // 5. Create Image mappings
+        \App\Models\ImageProduct::factory(20)->create();
+
+        // 6. Ensure Product Slugs are filled
+        foreach (\App\Models\Product::all() as $product) {
+            if (!$product->slug) {
+                $product->slug = \Illuminate\Support\Str::slug($product->nama_produk) . '-' . $product->id;
+                $product->save();
+            }
+        }
+
+        // 7. Create Portfolios
+        $this->call(PortfolioSeeder::class);
     }
 }

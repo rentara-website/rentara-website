@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
+use App\Http\Controllers\PortfolioController;
+
 Route::get('/', function () {
     return view('landingpage', [
         "title" => "Home",
@@ -10,4 +12,5 @@ Route::get('/', function () {
 });
 
 Route::get("/products", [ProductController::class, 'index']);
-Route::get("/products/search/{keyword}", [ProductController::class, 'search']);
+Route::get("/product/{product}", [ProductController::class, 'show'])->name('products.show');
+Route::get("/portfolio", [PortfolioController::class, 'index']);

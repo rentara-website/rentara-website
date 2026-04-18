@@ -6,14 +6,18 @@ module.exports = {
     './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
     './vendor/laravel/jetstream/**/*.blade.php',
     './storage/framework/views/*.php',
-    './resources/views/**/*.blade.php',
-    './resources/js/**/*.vue',
+    "./resources/**/*.{blade.php,js,vue}",
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
     './vendor/ddfsn/blade-components/resources/**/*.blade.php',
   ],
   theme: {
     extend: {
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
+      },
+      backgroundImage:{
+        'motorbike': "url('/images/OAYXH40.jpg')",
       },
     },
   },

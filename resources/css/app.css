@@ -20,3 +20,56 @@
     transition: all 0.3s ease-in-out;
 
 }
+
+.card3:hover{
+    background-image: url('/images/OAYXH40.jpg');
+}
+
+.filter-active {
+    background-color: #0A4088 !important;
+    color: white !important;
+    border-color: #0A4088 !important;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+}
+
+/* Masonry Grid (Pinterest Style) */
+.masonry-grid {
+    column-count: 2;
+    column-gap: 1.25rem;
+    padding: 1rem 0;
+}
+
+@media (min-width: 768px) {
+    .masonry-grid { column-count: 3; }
+}
+
+@media (min-width: 1024px) {
+    .masonry-grid { column-count: 4; }
+}
+
+@media (min-width: 1536px) {
+    .masonry-grid { column-count: 5; }
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.25rem;
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background-color: #f3f4f6;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.masonry-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    z-index: 10;
+}
+
+.masonry-item img, .masonry-item video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1.25rem;
+}

@@ -22,4 +22,19 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function portfolios()
+    {
+        return $this->hasMany(Portfolio::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
