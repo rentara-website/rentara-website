@@ -1,0 +1,65 @@
+services:
+    # Laravel Application
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: rentara-app
+        restart: unless-stopped
+        ports:
+            - "8080:80"
+        volumes:
+            - ./storage:/var/www/storage
+            - ./.env:/var/www/.env
+        depends_on:
+            mysql:
+                condition: service_healthy
+            redis:
+                condition: service_started
+        environment:
+            - DB_HOST=mysql
+            - REDIS_HOST=redis
+        networks:
+            - rentara-network
+
+    # MySQL Database
+    mysql:
+        image: mysql:8.0
+        container_name: rentara-mysql
+        restart: unless-stopped
+        ports:
+            - "3307:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_DATABASE: rentara
+            MYSQL_USER: rentara
+            MYSQL_PASSWORD: secret
+        volumes:
+            - mysql-data:/var/lib/mysql
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-psecret"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        networks:
+            - rentara-network
+
+    # Redis Cache
+    redis:
+        image: redis:7-alpine
+        container_name: rentara-redis
+        restart: unless-stopped
+        ports:
+            - "6380:6379"
+        volumes:
+            - redis-data:/data
+        networks:
+            - rentara-network
+
+networks:
+    rentara-network:
+        driver: bridge
+
+volumes:
+    mysql-data:
+    redis-data:
