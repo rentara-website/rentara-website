@@ -169,7 +169,7 @@
                             class="relative z-10 flex items-center gap-2 mt-6 text-white font-semibold text-sm group-hover:text-[#0A4088]">
                             Explore More
                             <span
-                                class="w-7 h-7 rounded-full bg-[#0A4088] group-hover:bg-white/30 flex items-center justify-center transition-all duration-300">
+                                class="text-white w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#0A4088] flex items-center justify-center transition-all duration-300">
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </span>
                         </div>

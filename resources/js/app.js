@@ -1,7 +1,17 @@
 import './bootstrap';
 
 import { createIcons, icons } from 'lucide';
-createIcons({ icons });
+
+document.addEventListener('DOMContentLoaded', () => {
+    createIcons({ 
+        icons,
+        attrs: {
+            'stroke-width': 2,
+            'stroke': 'currentColor',
+            'fill': 'none',
+        }
+    });
+});
 
 import Alpine from 'alpinejs'
 window.alpine = Alpine
@@ -9,7 +19,6 @@ Alpine.start()
 
 // Custom Modules
 import { initProductFilters } from './product/filter';
-import { initProductModal } from './product/modal';
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {

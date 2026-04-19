@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Image_product;
+use App\Models\ImageProduct;
 use App\Models\Category;
 
 class Product extends Model
@@ -15,7 +15,7 @@ class Product extends Model
 
     public function image_product()
     {
-        return $this->hasMany(Image_product::class);
+        return $this->hasMany(ImageProduct::class);
     }
 
     public function category()
@@ -36,5 +36,10 @@ class Product extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

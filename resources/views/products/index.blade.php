@@ -32,7 +32,7 @@
 
         <div class="flex flex-col lg:flex-row gap-8 lg:gap-10 relative">
             {{-- Filter Sidebar --}}
-            <aside class="w-full lg:w-72 flex-shrink-0">
+            <aside class="w-full lg:w-72 shrink-0">
                 <div class="lg:sticky lg:top-24 space-y-6 lg:space-y-8 mb-8 lg:mb-20">
                     {{-- Categories --}}
                     <div>

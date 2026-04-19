@@ -41,14 +41,16 @@ class ProductController extends Controller
             });
         }
 
-        $products = $query->get();
+        $perPage = $request->get('per_page', 20);
+        $products = $query->paginate($perPage);
         
-        // Group products by category
+        // Group paginated products by category
         $groupedProducts = $products->groupBy('category.name');
 
         $data = [
             "title" => "Products",
             "groupedProducts" => $groupedProducts,
+            "products" => $products,
             "categories" => Category::all(),
             "tags" => Tag::all(),
             "search" => $search,

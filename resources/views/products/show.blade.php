@@ -28,6 +28,10 @@
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
                         {{ $product->nama_produk }}
                     </h1>
+                    <div class="mt-4 flex items-center gap-2 text-sm font-bold text-gray-500 bg-gray-100 w-fit px-4 py-2 rounded-full">
+                        <i data-lucide="shopping-bag" class="w-4 h-4 text-[#0A4088]"></i>
+                        Telah dipesan {{ $product->orders()->where('status', 'Completed')->count() }} kali
+                    </div>
                 </div>
 
                 {{-- Price & Action --}}
