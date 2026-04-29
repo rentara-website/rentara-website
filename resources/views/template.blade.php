@@ -7,6 +7,7 @@
     <title>Rentara - {{$title}}</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    <link rel="icon" href="/images/Rentara-removebg-preview1.png" type="image/x-icon">
 </head>
 <body class="font-poppins flex flex-col min-h-screen overflow-x-hidden">
     <nav>@include('navbar')</nav>

@@ -8,6 +8,8 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="icon" href="/images/Rentara-removebg-preview1.png" type="image/x-icon">
+
 </head>
 <body class="bg-gray-50 font-poppins antialiased">
     <div class="flex h-screen overflow-hidden" x-data="{ sidebarOpen: false }">
