@@ -18,7 +18,7 @@
             
             <!-- Logo Section -->
             <div class="flex items-center justify-between h-20 px-6 bg-[#08306b]">
-                <a href="/" class="flex items-center gap-3">
+                <a href="/admin/dashboard" class="flex items-center gap-3">
                     <img src="/images/Rentara-removebg-preview1.png" alt="Logo" class="w-12 brightness-0 invert">
                     <span class="text-xl font-black tracking-wider">ADMIN</span>
                 </a>
@@ -44,6 +44,12 @@
                 </a>
 
                 <p class="px-4 text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 mt-6">Management</p>
+                
+                <a href="{{ url('/admin/categories') }}" 
+                   class="flex items-center gap-3 px-4 py-3 rounded-xl transition {{ Request::is('admin/categories*') ? 'bg-white/10 text-white font-bold border-l-4 border-white' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
+                    <i data-lucide="grid" class="w-5 h-5"></i>
+                    <span>Categories</span>
+                </a>
 
                 <a href="{{ url('/admin/products') }}" 
                    class="flex items-center gap-3 px-4 py-3 rounded-xl transition {{ Request::is('admin/products*') ? 'bg-white/10 text-white font-bold border-l-4 border-white' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
@@ -70,13 +76,10 @@
                 </a>
 
                 <div class="mt-auto pt-10">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="flex w-full items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:bg-red-500/10 hover:text-red-200 transition">
-                            <i data-lucide="log-out" class="w-5 h-5"></i>
-                            <span>Logout</span>
-                        </button>
-                    </form>
+                    <a href="/admin/dashboard" class="flex w-full items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:bg-red-500/10 hover:text-red-200 transition">
+                        <i data-lucide="home" class="w-5 h-5"></i>
+                        <span>Back to Site</span>
+                    </a>
                 </div>
             </nav>
         </aside>
@@ -99,20 +102,24 @@
                         <span>System Online</span>
                     </div>
 
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-4">
                         <div class="text-right hidden sm:block">
-                            <p class="text-sm font-bold text-gray-900 leading-tight">{{ Auth::user()->name }}</p>
-                            <p class="text-[10px] font-bold text-[#0A4088] uppercase tracking-wider">Administrator</p>
+                            <p class="text-xs font-black text-[#0A4088]">{{ auth()->user()->name }}</p>
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{ auth()->user()->email }}</p>
                         </div>
-                        <img src="{{ Auth::user()->avatar ?? 'https://ui-avatars.com/api/?name='.urlencode(Auth::user()->name).'&color=0A4088&background=EBF4FF' }}" 
-                             alt="Avatar" class="w-10 h-10 rounded-full border-2 border-[#0A4088]/10 object-cover">
+                        <form action="{{ route('logout') }}" method="POST" class="m-0 border-l border-gray-100 pl-4">
+                            @csrf
+                            <button type="submit" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title="Logout">
+                                <i data-lucide="log-out" class="w-5 h-5"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </header>
 
             <!-- Page Content -->
             <main class="flex-1 overflow-y-auto p-6 lg:p-10 bg-gray-50/50">
-                @if(session('success'))
+                <!-- @if(session('success'))
                     <div class="mb-6 p-4 bg-green-50 border border-green-100 text-green-700 rounded-2xl flex items-center gap-3 shadow-sm">
                         <i data-lucide="check-circle" class="w-5 h-5"></i>
                         <span class="font-bold text-sm">{{ session('success') }}</span>
@@ -124,17 +131,19 @@
                         <i data-lucide="alert-circle" class="w-5 h-5"></i>
                         <span class="font-bold text-sm">{{ session('error') }}</span>
                     </div>
-                @endif
+                @endif -->
 
                 @yield('admin_content')
             </main>
         </div>
     </div>
 
-    <!-- Lucide Icons -->
+    
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         lucide.createIcons();
     </script>
+    
+    @stack('scripts')
 </body>
 </html>

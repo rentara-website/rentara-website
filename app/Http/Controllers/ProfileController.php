@@ -12,9 +12,16 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $orders = $user->orders()->with('product')->latest('booking_date')->get();
+        // Create demo user data for public access
+        $user = (object) [
+            'name' => 'Demo User',
+            'email' => 'demo@example.com',
+            'avatar' => null
+        ];
+        
+        // Get sample orders for demo
+        $orders = collect([]);
 
-        return view('profile.index', compact('user', 'orders'));
+        return view('profile.index', ["title" => "Profile"],  compact('user', 'orders'));
     }
 }

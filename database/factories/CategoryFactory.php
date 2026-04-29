@@ -9,9 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CategoryFactory extends Factory
 {
-    private static $counter = 0;
-    private static $categories = ["Content Equipment", "Photographer", "Videographer"];
-
     /**
      * Define the model's default state.
      *
@@ -19,12 +16,8 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $name = self::$categories[self::$counter % count(self::$categories)];
-        self::$counter++;
-        
         return [
-            "name" => $name,
-            "slug" => \Illuminate\Support\Str::slug($name),
+            //
         ];
     }
 }

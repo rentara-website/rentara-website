@@ -6,32 +6,25 @@
         
         {{-- Profile Header --}}
         <div class="bg-white rounded-3xl p-8 md:p-10 shadow-lg border border-gray-100 mb-8 flex flex-col md:flex-row items-center gap-8">
-            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#0A4088] shrink-0">
-                <img src="{{ $user->avatar ?? 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&color=0A4088&background=EBF4FF' }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#0A4088] shrink-0 bg-[#EBF4FF] flex items-center justify-center">
+                <span class="text-4xl font-black text-[#0A4088] uppercase">{{ substr(auth()->user()->name, 0, 1) }}</span>
             </div>
             <div class="flex-1 text-center md:text-left">
-                <h1 class="text-3xl font-black text-gray-900 mb-2">{{ $user->name }}</h1>
-                <p class="text-gray-500 font-medium">{{ $user->email }}</p>
-                @if(!$user->hasVerifiedEmail() && !$user->google_id)
-                    <div class="mt-4 bg-yellow-100 text-yellow-800 px-4 py-2 rounded-xl text-sm font-bold w-fit mx-auto md:mx-0 flex items-center gap-2">
-                        <i data-lucide="alert-circle" class="w-4 h-4"></i>
-                        Please check your email to verify your account
-                        <form method="POST" action="/email/verification-notification" class="inline">
-                            @csrf
-                            <button type="submit" class="underline text-[#0A4088] ml-2">Resend Email</button>
-                        </form>
-                    </div>
-                @elseif($user->hasVerifiedEmail() || $user->google_id)
-                    <div class="mt-4 bg-green-100 text-green-800 px-4 py-2 rounded-xl text-sm font-bold w-fit mx-auto md:mx-0 flex items-center gap-2">
-                        <i data-lucide="check-circle" class="w-4 h-4"></i>
-                        Verified
-                    </div>
-                @endif
+                <h1 class="text-3xl font-black text-gray-900 mb-2">{{ auth()->user()->name }}</h1>
+                <p class="text-gray-500 font-medium">{{ auth()->user()->email }}</p>
+                <div class="mt-4 bg-green-100 text-green-800 px-4 py-2 rounded-xl text-sm font-bold w-fit mx-auto md:mx-0 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    Verified User
+                </div>
             </div>
             <div class="flex flex-col gap-3 w-full md:w-auto">
-                <form method="POST" action="{{ route('logout') }}">
+                <a href="/" class="w-full bg-[#0A4088] hover:bg-[#08306b] text-white font-bold py-3 px-6 rounded-2xl transition-colors shadow-lg shadow-[#0A4088]/30 flex items-center justify-center gap-2">
+                    <i data-lucide="home" class="w-5 h-5"></i>
+                    Back to Home
+                </a>
+                <form action="{{ route('logout') }}" method="POST" class="w-full">
                     @csrf
-                    <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-2xl transition-colors shadow-lg shadow-red-500/30 flex items-center justify-center gap-2">
+                    <button type="submit" class="w-full bg-red-50 hover:bg-red-100 text-red-600 font-bold py-3 px-6 rounded-2xl transition-colors border border-red-100 flex items-center justify-center gap-2">
                         <i data-lucide="log-out" class="w-5 h-5"></i>
                         Logout
                     </button>
@@ -54,42 +47,61 @@
                     <a href="/products" class="inline-block mt-6 bg-[#0A4088] text-white font-bold py-3 px-8 rounded-2xl hover:bg-[#08306b] transition-colors shadow-lg">Browse Products</a>
                 </div>
             @else
-                <div class="space-y-4">
-                    @foreach($orders as $order)
-                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-6 items-center hover:shadow-md transition-shadow">
-                            <div class="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center overflow-hidden shrink-0">
-                                @if($order->product->image_product->isNotEmpty())
-                                    <img src="{{ Str::startsWith($order->product->image_product->first()->image_path, 'http') ? $order->product->image_product->first()->image_path : asset('storage/' . $order->product->image_product->first()->image_path) }}" alt="{{ $order->product->nama_produk }}" class="w-full h-full object-cover">
-                                @else
-                                    <i data-lucide="camera" class="w-8 h-8 text-gray-400"></i>
-                                @endif
-                            </div>
-                            <div class="flex-1 w-full text-center sm:text-left">
-                                <h3 class="text-lg font-bold text-gray-900">{{ $order->product->nama_produk }}</h3>
-                                <p class="text-sm font-bold text-gray-400 mt-1">Booked for: {{ $order->booking_date->format('d M Y, H:i') }}</p>
-                                
-                                <div class="mt-3 flex items-center justify-center sm:justify-start gap-4 flex-wrap">
-                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs font-bold rounded-full border border-gray-200">
-                                        ID: #{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}
-                                    </span>
-                                    
-                                    @if($order->status === 'Completed')
-                                        <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Completed</span>
-                                    @elseif($order->status === 'Pending')
-                                        <span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full">Pending</span>
-                                    @elseif($order->status === 'Deal')
-                                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">Confirmed / Deal</span>
-                                    @else
-                                        <span class="px-3 py-1 bg-red-100 text-red-700 text-xs font-bold rounded-full">{{ $order->status }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="w-full sm:w-auto text-center sm:text-right border-t sm:border-t-0 p-4 sm:p-0 border-gray-100">
-                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Total Price</p>
-                                <p class="text-xl font-black text-[#0A4088]">Rp {{ number_format($order->total_price, 0, ',', '.') }}</p>
-                            </div>
-                        </div>
-                    @endforeach
+                <div class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left whitespace-nowrap">
+                            <thead class="bg-gray-50 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                <tr>
+                                    <th class="px-6 py-5">Order ID</th>
+                                    <th class="px-6 py-5">Product</th>
+                                    <th class="px-6 py-5">Booking Date</th>
+                                    <th class="px-6 py-5">Total Price</th>
+                                    <th class="px-6 py-5">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-50 text-sm">
+                                @foreach($orders as $order)
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="px-6 py-4 font-bold text-gray-900">
+                                            #{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden shrink-0">
+                                                    @if($order->product->image_product->isNotEmpty())
+                                                        <img src="{{ Str::startsWith($order->product->image_product->first()->image_path, 'http') ? $order->product->image_product->first()->image_path : asset('storage/' . $order->product->image_product->first()->image_path) }}" alt="{{ $order->product->nama_produk }}" class="w-full h-full object-cover">
+                                                    @else
+                                                        <i data-lucide="camera" class="w-4 h-4 text-gray-400"></i>
+                                                    @endif
+                                                </div>
+                                                <span class="font-bold text-gray-900">{{ $order->product->nama_produk }}</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-gray-500 font-medium">
+                                            <div>{{ $order->booking_date->format('d M Y, H:i') }}</div>
+                                            @if($order->end_date)
+                                                <div class="text-[10px] text-gray-400 mt-0.5">to {{ $order->end_date->format('d M Y, H:i') }}</div>
+                                            @endif
+                                        </td>
+                                        <td class="px-6 py-4 font-black text-[#0A4088]">
+                                            Rp {{ number_format($order->total_price, 0, ',', '.') }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            @if($order->status === 'Completed')
+                                                <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Completed</span>
+                                            @elseif($order->status === 'Pending')
+                                                <span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full">Pending</span>
+                                            @elseif($order->status === 'Deal')
+                                                <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">Deal</span>
+                                            @else
+                                                <span class="px-3 py-1 bg-red-100 text-red-700 text-xs font-bold rounded-full">{{ $order->status }}</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             @endif
         </div>

@@ -2,47 +2,85 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TagController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $tags = \App\Models\Tag::all();
         return view('admin.tags.index', [
-            'title' => 'Manage Tags',
-            'tags' => $tags
+            'tags' => Tag::all(),
         ]);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required|unique:tags,name']);
-        
-        \App\Models\Tag::create([
-            'name' => $request->name,
-            'slug' => \Illuminate\Support\Str::slug($request->name)
+        $request->validate([
+            'name' => 'required|string|max:255|unique:tags,name',
+            'slug' => 'required|string|max:255|unique:tags,slug',
         ]);
 
-        return back()->with('success', 'Tag created successfully!');
+        Tag::create($request->only('name', 'slug'));
+
+        return redirect()->route('admin.tags.index')->with('success', 'Tag created successfully.');
     }
 
-    public function update(Request $request, \App\Models\Tag $tag)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Tag $tag)
     {
-        $request->validate(['name' => 'required|unique:tags,name,' . $tag->id]);
-        
-        $tag->update([
-            'name' => $request->name,
-            'slug' => \Illuminate\Support\Str::slug($request->name)
-        ]);
-
-        return back()->with('success', 'Tag updated successfully!');
+        //
     }
 
-    public function destroy(\App\Models\Tag $tag)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Tag $tag)
+    {
+        return view('admin.tags.edit', [
+            'tag' => $tag,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Tag $tag)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:tags,name,' . $tag->id,
+            'slug' => 'required|string|max:255|unique:tags,slug,' . $tag->id,
+        ]);
+
+        $tag->update($request->only('name', 'slug'));
+
+        return redirect()->route('admin.tags.index')->with('success', 'Tag updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Tag $tag)
     {
         $tag->delete();
-        return back()->with('success', 'Tag deleted successfully!');
+
+        return redirect()->route('admin.tags.index')->with('success', 'Tag deleted successfully.');
     }
 }

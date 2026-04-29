@@ -12,6 +12,18 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'nama_produk',
+        'slug',
+        'harga',
+        'deskripsi',
+        'category_id',
+    ];
 
     public function image_product()
     {

@@ -4,22 +4,36 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = \App\Models\User::latest()->paginate(20);
+        $users = User::latest()->paginate(20);
         return view('admin.users.index', [
             'title' => 'User Management',
             'users' => $users
         ]);
     }
 
-    public function toggleRole(\App\Models\User $user)
+    public function store(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed|hash:sha256',
+        ]);
+
+        User::create($request->only('name', 'email', 'password'));
+
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
+    }
+
+    public function toggleRole(User $user)
     {
-        if ($user->id === auth()->id()) {
-            return back()->with('error', 'You cannot change your own role.');
+        // Removed auth check for public access
+        if ($user->id === 1) {
+            return back()->with('error', 'Cannot modify default admin user.');
         }
 
         $user->role = $user->role === 'admin' ? 'user' : 'admin';
@@ -28,10 +42,11 @@ class UserController extends Controller
         return back()->with('success', 'User role updated to ' . $user->role);
     }
 
-    public function destroy(\App\Models\User $user)
+    public function destroy(User $user)
     {
-        if ($user->id === auth()->id()) {
-            return back()->with('error', 'You cannot delete yourself.');
+        // Removed auth check for public access
+        if ($user->id === 1) {
+            return back()->with('error', 'Cannot delete default admin user.');
         }
 
         $user->delete();
