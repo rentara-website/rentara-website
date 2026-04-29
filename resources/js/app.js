@@ -43,3 +43,11 @@ document.addEventListener('products:updated', () => {
         console.warn('Lucide re-init failed:', e);
     }
 });
+
+const categoryName = document.querySelector('.category-name'); // Get the first element
+const categorySlug = document.querySelector('.category-slug'); // Get the first element
+
+categoryName.addEventListener('keyup', function() {
+    const slug = categoryName.value.toLowerCase().split(' ').join('-').replace(/[^\w-]+/g, '');
+    categorySlug.value = slug;
+});

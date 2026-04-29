@@ -15,6 +15,12 @@
         </button>
     </div>
 
+    @if (session('success'))
+        <div class="mt-2 bg-green-400 px-2 py-2 rounded-lg w-full">
+            <p class="text-white">{{ session('success') }}</p>
+        </div>
+    @endif
+
     <!-- Tags Table -->
     <div class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
         <div class="overflow-x-auto">
@@ -35,16 +41,15 @@
                                     {{ $tag->name }}
                                 </span>
                             </td>
-                            <td class="px-8 py-5 text-gray-400 font-medium lowercase">/tag/{{ $tag->slug }}</td>
+                            <td class="px-8 py-5 text-gray-400 font-medium lowercase">?tag={{ $tag->slug }}</td>
                             <td class="px-8 py-5 text-gray-600">
                                 {{ $tag->products()->count() }} Products
                             </td>
                             <td class="px-8 py-5 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <button @click="currentTag = {id: {{ $tag->id }}, name: '{{ $tag->name }}'}; openEdit = true" 
-                                            class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
+                                    <a href="{{ route('admin.tags.edit', $tag->id) }}" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
                                         <i data-lucide="edit-3" class="w-4 h-4"></i>
-                                    </button>
+                                    </a>
                                     <form action="{{ route('admin.tags.destroy', $tag->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this tag?')">
                                         @csrf
                                         @method('DELETE')
@@ -66,43 +71,34 @@
     </div>
 
     <!-- Create Modal -->
-    <div x-show="openCreate" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" style="display: none;">
+    <div x-show="openCreate" class="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" style="display: none;">
         <div class="bg-white w-full max-w-md rounded-3xl p-8 shadow-2xl" @click.away="openCreate = false">
             <h3 class="text-xl font-black text-gray-900 mb-6">Create New Tag</h3>
             <form action="{{ route('admin.tags.store') }}" method="POST">
                 @csrf
                 <div class="space-y-4">
-                    <div>
+                    <div class="mb-2">
                         <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Tag Name</label>
                         <input type="text" name="name" required placeholder="e.g. Photography"
-                               class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
+                        class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition category-name">
+                        @error('name')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Tag Slug</label>
+                        <input type="text" name="slug" required placeholder="e.g. photography"
+                        class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition category-slug" readonly>
+                        @error('slug')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+
                     </div>
                 </div>
                 <div class="flex items-center gap-3 mt-8">
                     <button type="button" @click="openCreate = false" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold py-3 rounded-2xl transition">Cancel</button>
                     <button type="submit" class="flex-1 bg-[#0A4088] hover:bg-[#08306b] text-white font-bold py-3 rounded-2xl transition shadow-lg shadow-[#0A4088]/20">Create Tag</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Edit Modal -->
-    <div x-show="openEdit" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" style="display: none;">
-        <div class="bg-white w-full max-w-md rounded-3xl p-8 shadow-2xl" @click.away="openEdit = false">
-            <h3 class="text-xl font-black text-gray-900 mb-6">Edit Tag</h3>
-            <form :action="'{{ url('/admin/tags') }}/' + currentTag.id" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Tag Name</label>
-                        <input type="text" name="name" x-model="currentTag.name" required placeholder="e.g. Photography"
-                               class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
-                    </div>
-                </div>
-                <div class="flex items-center gap-3 mt-8">
-                    <button type="button" @click="openEdit = false" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold py-3 rounded-2xl transition">Cancel</button>
-                    <button type="submit" class="flex-1 bg-[#0A4088] hover:bg-[#08306b] text-white font-bold py-3 rounded-2xl transition shadow-lg shadow-[#0A4088]/20">Save Changes</button>
                 </div>
             </form>
         </div>

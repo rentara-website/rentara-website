@@ -15,12 +15,14 @@ class Order extends Model
         'status',
         'total_price',
         'booking_date',
+        'end_date',
     ];
 
     protected function casts(): array
     {
         return [
             'booking_date' => 'datetime',
+            'end_date' => 'datetime',
             'total_price' => 'decimal:2',
         ];
     }

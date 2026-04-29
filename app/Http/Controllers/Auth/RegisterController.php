@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
@@ -20,16 +25,17 @@ class RegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $user = \App\Models\User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
-            'role' => 'user', 
+            'password' => Hash::make($request->password),
+            'role' => 'user',
         ]);
 
-        event(new \Illuminate\Auth\Events\Registered($user));
+        event(new Registered($user));
 
-        \Illuminate\Support\Facades\Auth::login($user);
+        Auth::login($user);
+
 
         return redirect()->route('verification.notice');
     }

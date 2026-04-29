@@ -12,7 +12,7 @@
 <body class="font-poppins flex flex-col min-h-screen overflow-x-hidden">
     <nav>@include('navbar')</nav>
 
-    <main class="flex-grow">
+    <main class="grow">
         @yield('content')
     </main>
 
