@@ -19,7 +19,7 @@
     @if ($errors->any() || session('error'))
         <div class="mb-8 p-6 bg-red-50 border border-red-100 rounded-2xl">
             <div class="flex items-start gap-4">
-                <i data-lucide="alert-circle" class="w-6 h-6 text-red-500 mt-0.5 flex-shrink-0"></i>
+                <i data-lucide="alert-circle" class="w-6 h-6 text-red-500 mt-0.5 shrink-0"></i>
                 <div>
                     <h3 class="text-sm font-bold text-red-800 mb-1">There were some problems with your submission</h3>
                     @if (session('error'))
@@ -73,7 +73,7 @@
 
                 <div class="space-y-2">
                     <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Tags</label>
-                    <div class="flex flex-wrap gap-2 p-3 bg-gray-50 border border-gray-100 rounded-2xl min-h-[50px]">
+                    <div class="flex flex-wrap gap-2 p-3 bg-gray-50 border border-gray-100 rounded-2xl min-h-12.5">
                         @foreach($tags as $tag)
                             <label class="flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-gray-100 cursor-pointer hover:border-[#0A4088] transition group">
                                 <input type="checkbox" name="tags[]" value="{{ $tag->id }}" {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} class="sr-only peer">
