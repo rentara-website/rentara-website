@@ -18,7 +18,7 @@
                         class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition-all duration-200">
                         <i data-lucide="mail" class="w-4 h-4 text-white"></i>
                     </a>
-                    <a href="https://wa.me/6289519929891" target="_blank" title="WhatsApp"
+                    <a href="{{route('whatsapp.rent') . "?text=Hi Saya ingin bertanya mengenai Rentara."}}" target="_blank" title="WhatsApp"
                         class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition-all duration-200">
                         <i data-lucide="phone" class="w-4 h-4 text-white"></i>
                     </a>
@@ -55,7 +55,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://wa.me/6289519929891?text=Haloo saya ingin bertanya tentang Rentara."
+                        <a href="{{route('whatsapp.rent') . "?text=Hi Saya ingin bertanya mengenai Rentara."}}"
                             target="_blank"
                             class="text-white/70 hover:text-white text-sm sm:text-base transition-colors duration-200 flex items-center gap-2 group">
                             <i data-lucide="chevron-right"

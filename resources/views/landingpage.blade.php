@@ -9,11 +9,11 @@
             <p class="mt-4 sm:mt-5 text-lg sm:text-xl md:text-2xl text-gray-500 leading-relaxed">
                 Rent cameras, content gear, and book photographers or videographers in Bali — all in one place. 📸🎥
             </p>
-            <button type="button"
+            <a href="/products"
                 class="bg-[#0A4088] hover:bg-[#032d63] text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-full mt-6 sm:mt-8 inline-flex items-center gap-2 transition duration-300 hover:cursor-pointer w-fit">
                 Explore Categories
                 <i data-lucide="arrow-right" class="w-4 h-4 text-white"></i>
-            </button>
+            </a>
         </div>
 
         <div class="hero-section-right w-full lg:w-1/2 flex justify-center">
@@ -204,7 +204,7 @@
 
                 {{-- ITEM 1 — LARGE (spans 2 rows on lg) — Verified Partners --}}
                 <div
-                    class="relative rounded-3xl overflow-hidden bg-[#0A4088] p-8 sm:p-10 flex flex-col justify-between lg:row-span-2 min-h-[280px] lg:min-h-[480px] group hover:shadow-2xl transition-all duration-300">
+                    class="relative rounded-3xl overflow-hidden bg-[#0A4088] p-8 sm:p-10 flex flex-col justify-between lg:row-span-2 min-h-70 lg:min-h-120 group hover:shadow-2xl transition-all duration-300">
                     {{-- Decorative circle --}}
                     <div
                         class="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5 group-hover:scale-150 transition-all duration-500">
@@ -275,22 +275,63 @@
                     </div>
                 </div>
 
-                {{-- ITEM 4 — Wide Rental Selection (spans 2 cols on sm+) --}}
+                {{-- ITEM 4 — Wide Rental Selection --}}
                 <div
-                    class="relative rounded-3xl overflow-hidden bg-[#0A4088]/5 border border-[#0A4088]/10 p-7 sm:p-8 flex flex-col sm:flex-row lg:flex-row items-center gap-6 sm:col-span-2 lg:col-span-2 min-h-[180px] group hover:shadow-xl hover:bg-[#0A4088]/10 transition-all duration-300">
+                    class="relative
+                        rounded-3xl overflow-hidden
+                        bg-[#0A4088]/5
+                        border border-[#0A4088]/10
+                        p-6 sm:p-8 lg:p-10
+                        flex flex-col
+                        sm:flex-row
+                        items-start sm:items-center
+                        gap-5 sm:gap-6 lg:gap-8
+                        sm:col-span-2 lg:col-span-2
+                        min-h-[160px] sm:min-h-[180px] lg:min-h-[200px]
+                        group hover:shadow-xl hover:bg-[#0A4088]/10
+                        transition-all duration-300">
+
+                    <!-- Background badge di pojok kanan atas (mirip Item 3) -->
                     <div
-                        class="flex-shrink-0 w-16 h-16 rounded-2xl bg-[#0A4088] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="layers" class="w-8 h-8 text-white"></i>
+                        class="absolute top-0 right-0
+                            w-28 h-28
+                            rounded-bl-full
+                            bg-[#0A4088]/10
+                            group-hover:bg-[#0A4088]/20
+                            transition-all duration-300
+                            z-0">
+
+                        <!-- Teks #4 berada di atas overlay ini -->
+                        <span class="absolute top-4 right-4
+                                    text-4xl sm:text-5xl font-black select-none
+                                    z-10
+                                    text-[#0A4088]/40
+                                    leading-none">
+                            #4
+                        </span>
                     </div>
-                    <div>
-                        <div class="flex items-center gap-3 mb-2">
-                            <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Wide Rental Selection</h2>
-                            <span class="text-4xl font-black leading-none select-none"
-                                style="color: transparent; -webkit-text-stroke: 2px rgba(10, 64, 136, 0.2);">#4</span>
-                        </div>
+
+                    <!-- Icon badge (tetap di kiri) -->
+                    <div
+                        class="flex-shrink-0
+                            w-14 h-14 sm:w-16 sm:h-16
+                            rounded-2xl bg-[#0A4088]
+                            flex items-center justify-center
+                            group-hover:scale-110
+                            transition-transform duration-300
+                            relative z-10">
+                        <i data-lucide="layers" class="w-6 h-6 sm:w-8 sm:h-8 text-white"></i>
+                    </div>
+
+                    <!-- Text content (judul + paragraf) -->
+                    <div class="flex-1 space-y-2 relative z-10">
+
+                        <h2 class="text-base sm:text-xl md:text-2xl font-bold text-gray-900 leading-tight">
+                            Wide Rental Selection
+                        </h2>
+
                         <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
-                            From cameras and tripods to motorbikes — access a wide variety of gear and vehicles from trusted
-                            local Bali partners, all in one platform.
+                            From cameras and tripods to motorbikes — access a wide variety of gear and vehicles from trusted local Bali partners, all in one platform.
                         </p>
                     </div>
                 </div>
@@ -376,6 +417,107 @@
 
             </div>
         </div>
+    </div>
+
+    <div class="our-latest-listing-container py-10 sm:py-14 lg:py-20">
+        <div class="our-latest-listing-wrapper px-6 sm:px-8 md:px-10 lg:px-14 max-w-7xl mx-auto">
+            <div class="mb-8 sm:mb-10 lg:mb-12">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-3 sm:mb-4 lg:mb-6">Our Latest
+                    Listings</h1>
+                <p class="text-gray-500 text-base sm:text-lg md:text-xl leading-relaxed">Discover the newest cameras, gear,
+                    and rental providers added to Rentara.</p>
+            </div>
+            {{-- LATEST PRODUCTS (section) --}}
+            <div class="mb-12">
+                @if ($productLatest->isEmpty())
+                    <div class="bg-gray-50 border border-gray-100 rounded-3xl p-12 text-center">
+                        <i data-lucide="package" class="w-12 h-12 text-gray-300 mx-auto mb-4"></i>
+                        <p class="text-gray-500 text-sm font-medium">No products available yet.</p>
+                        <p class="text-gray-400 text-xs mt-1">Products will appear here once added to the system.</p>
+                    </div>
+                @else
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                        @foreach ($productLatest as $product)
+                            <div
+                                class="group relative bg-white rounded-3xl border border-gray-100 p-4 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(8,112,184,0.1)] hover:-translate-y-2">
+                                {{-- Image Container --}}
+                                <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-5">
+                                    <img
+                                        src="{{ \Illuminate\Support\Str::startsWith($product->image_product->first()?->image_path, 'http')
+                                            ? $product->image_product->first()?->image_path
+                                            : asset('storage/' . $product->image_product->first()?->image_path) }}"
+                                        alt="{{ $product->nama_produk }}"
+                                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+
+                                    {{-- Category Badge --}}
+                                    <div class="absolute top-4 left-4">
+                                        <span
+                                            class="bg-white/90 backdrop-blur-sm text-[#0A4088] text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-sm">
+                                            {{ $product->category->name ?? '' }}
+                                        </span>
+                                    </div>
+
+                                    {{-- Hover Quick Action --}}
+                                    <div
+                                        class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <a
+                                            href="{{ route('whatsapp.rent', ['product' => $product->slug]) }}?text=Rental {{ urlencode($product->nama_produk) }} dari Rentara"
+                                            target="_blank"
+                                            class="bg-white text-[#0A4088] px-6 py-2.5 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                            Rent Now
+                                        </a>
+                                    </div>
+                                </div>
+
+                                {{-- Content --}}
+                                <div class="px-2">
+                                    <h3 class="text-xl font-bold text-gray-900 group-hover:text-[#0A4088] transition-colors line-clamp-1 mb-2">
+                                        {{ $product->nama_produk }}
+                                    </h3>
+
+                                    <p class="text-gray-500 text-sm line-clamp-2 mb-4 h-10">
+                                        {{ \Illuminate\Support\Str::limit($product->deskripsi, 120, '...') }}
+                                    </p>
+
+                                    {{-- Tags --}}
+                                    <div class="flex flex-wrap gap-1.5 mb-5">
+                                        @foreach ($product->tags as $tag)
+                                            <a href="{{ url('/products?tag=' . $tag->slug) }}"
+                                            class="text-[10px] font-bold text-gray-400 bg-gray-50 px-2 py-1 rounded-md hover:bg-gray-100 hover:text-[#0A4088] transition-colors filter-link"
+                                            data-url="{{ url('/products?tag=' . $tag->slug) }}"
+                                            data-tag-slug="{{ $tag->slug }}">
+                                                #{{ $tag->name }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+
+                                    {{-- Footer --}}
+                                    <div class="flex items-center justify-between pt-4 border-t border-gray-50">
+                                        <div>
+                                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">
+                                                Starting from
+                                            </p>
+                                            <div class="flex items-baseline gap-1">
+                                                <span class="text-xl font-black text-[#0A4088] animate-pulse">
+                                                    Rp{{ number_format($product->harga, 0, ',', '.') }}
+                                                </span>
+                                                <span class="text-xs text-gray-400 font-medium">/day</span>
+                                            </div>
+                                        </div>
+
+                                        <a href="{{ route('products.show', $product->slug) }}"
+                                        class="px-4 py-2 bg-[#0A4088]/5 text-[#0A4088] text-xs font-bold rounded-lg hover:bg-[#0A4088] hover:text-white transition-all duration-300">
+                                            Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+        </div>
+
     </div>
 
 @endsection

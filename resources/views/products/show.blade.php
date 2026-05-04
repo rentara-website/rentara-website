@@ -11,7 +11,9 @@
             <div class="w-full lg:w-1/2 relative group">
                 <div class="absolute inset-0 bg-[#0A4088]/5 rounded-3xl -rotate-2 transform group-hover:rotate-0 transition-transform duration-500"></div>
                 <div class="relative bg-gray-50 rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl shadow-[#0A4088]/10 border border-gray-100">
-                    <img src="/images/Rectangle24.png" alt="{{ $product->nama_produk }}" class="w-full h-auto max-h-[500px] object-contain transform group-hover:scale-105 transition-transform duration-700">
+                    <img src="{{ \Illuminate\Support\Str::startsWith($product->image_product->first()?->image_path, 'http')
+                    ? $product->image_product->first()?->image_path
+                    : asset('storage/' . $product->image_product->first()?->image_path) }}" alt="{{ $product->nama_produk }}" class="w-full h-auto max-h-125 object-contain transform group-hover:scale-105 transition-transform duration-700">
                     
                     {{-- Category Badge --}}
                     <div class="absolute top-6 left-6">
@@ -44,7 +46,7 @@
                         </div>
                     </div>
                     
-                    <a href="https://wa.me/6289519929891?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa ' . $product->nama_produk) }}" target="_blank" class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95">
+                    <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa ' . $product->nama_produk) }}" target="_blank" class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95">
                         <i data-lucide="message-circle" class="w-6 h-6"></i>
                         Rent Now
                     </a>

@@ -15,6 +15,17 @@
         </a>
     </div>
 
+    @if (session('success'))
+        <div class="mt-2 bg-green-400 px-2 py-2 rounded-lg w-full">
+            <p class="text-white">{{ session('success') }}</p>
+        </div>
+    @else
+        <div class="mt-2 bg-red-400 px-2 py-2 rounded-lg w-full">
+            <p class="text-red-700">{{ session('error') }}</p>
+
+        </div>
+    @endif
+
     <!-- Products Table -->
     <div class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
         <div class="overflow-x-auto">

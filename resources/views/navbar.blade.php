@@ -66,7 +66,7 @@
 
             <a href="/" class="py-3 border-b border-gray-100 hover:text-[#0A4088] transition">Home</a>
             <a href="/products" class="py-3 border-b border-gray-100 hover:text-[#0A4088] transition">Products</a>
-            <a href="https://wa.me/6281938092473?text=Haloo saya ingin bertanya tentang Rentara." target="_blank" class="py-3 hover:text-[#0A4088] transition">Contact Us</a>
+            <a href="{{route("whatsapp.rent") . "?text=Haloo saya ingin bertanya tentang Rentara."}}" target="_blank" class="py-3 hover:text-[#0A4088] transition border-b border-gray-100">Contact Us</a>
 
             <!-- Mobile Navigation -->
             @auth

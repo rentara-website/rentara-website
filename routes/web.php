@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Product;
+
 
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
@@ -25,8 +27,13 @@ use App\Http\Controllers\Admin\DashboardController;
 Route::get('/', function () {
     return view('landingpage', [
         "title" => "Home",
+        "productLatest" => Product::latest()->take(3)->get(),
     ]);
 });
+
+Route::get("wa.me/6281234567890", function () {
+    return redirect("https://wa.me/6281234567890");
+})->name('whatsapp.rent');
 
 Route::get("/products", [ProductController::class, 'index']);
 Route::get("/product/{product}", [ProductController::class, 'show'])->name('products.show');
