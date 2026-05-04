@@ -40,7 +40,7 @@
 
                 <p
                     class="text-white text-lg sm:text-xl md:text-2xl underline mt-6 sm:mt-8 cursor-pointer hover:text-gray-200 transition">
-                    All rental options in one platform?</p>
+                    All rental options in one platform</p>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
 
                 {{-- Card 1: Photographer --}}
-                <a href="#" class="group block h-full">
+                <a href="/products?category=photographer" class="group block h-full">
                     <div
                         class="relative flex flex-col h-full bg-[#0A4088] rounded-2xl p-7 sm:p-8 overflow-hidden transition-all duration-300 group-hover:bg-[#EDEFEF] group-hover:shadow-xl group-hover:-translate-y-1">
 
@@ -101,7 +101,7 @@
                 </a>
 
                 {{-- Card 2: Videographer --}}
-                <a href="#" class="group block h-full">
+                <a href="/products?category=videographer" class="group block h-full">
                     <div
                         class="relative flex flex-col h-full bg-[#0A4088] rounded-2xl p-7 sm:p-8 overflow-hidden transition-all duration-300 group-hover:bg-[#EDEFEF] group-hover:shadow-xl group-hover:-translate-y-1">
 
@@ -138,7 +138,7 @@
                 </a>
 
                 {{-- Card 3: Content Equipment --}}
-                <a href="#" class="group block h-full sm:col-span-2 lg:col-span-1">
+                <a href="/products?category=content-equipment" class="group block h-full sm:col-span-2 lg:col-span-1">
                     <div
                         class="relative flex flex-col h-full bg-[#0A4088] rounded-2xl p-7 sm:p-8 overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1 group-hover:bg-motorbike bg-cover bg-center">
 
