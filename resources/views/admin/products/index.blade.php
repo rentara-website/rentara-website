@@ -19,10 +19,9 @@
         <div class="mt-2 bg-green-400 px-2 py-2 rounded-lg w-full">
             <p class="text-white">{{ session('success') }}</p>
         </div>
-    @else
+    @elseif(session('error'))
         <div class="mt-2 bg-red-400 px-2 py-2 rounded-lg w-full">
             <p class="text-red-700">{{ session('error') }}</p>
-
         </div>
     @endif
 
