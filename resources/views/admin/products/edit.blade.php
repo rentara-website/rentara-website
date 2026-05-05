@@ -79,7 +79,7 @@
                 <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Main Product Image</label>
                 @if($product->image_product->isNotEmpty())
                     <div class="flex items-center gap-4 p-4 border border-gray-100 rounded-2xl bg-gray-50">
-                        <img src="{{ Str::startsWith($product->image_product->first()->image_path, 'http') ? $product->image_product->first()->image_path : asset('storage/' . $product->image_product->first()->image_path) }}" class="w-20 h-20 rounded-xl object-cover">
+                        <img src="{{ $product->image_product->first()->url }}" class="w-20 h-20 rounded-xl object-cover">
                         <div class="flex-1">
                             <p class="text-sm font-bold text-gray-900">Current Image</p>
                             <p class="text-xs text-gray-500 mt-1">Upload a new image below to automatically replace this.</p>
@@ -103,7 +103,7 @@
                             <label class="relative group w-24 h-24 rounded-xl overflow-hidden border-2 border-transparent cursor-pointer hover:border-red-500 transition-colors has-[:checked]:border-red-500 has-[:checked]:opacity-50">
                                 <input type="checkbox" name="delete_portfolios[]" value="{{ $portfolio->id }}" class="peer sr-only">
                                 @if($portfolio->type === 'image')
-                                    <img src="{{ Str::startsWith($portfolio->file_path, 'http') ? $portfolio->file_path : asset('storage/' . $portfolio->file_path) }}" class="w-full h-full object-cover">
+                                    <img src="{{ $portfolio->url }}" class="w-full h-full object-cover">
                                 @else
                                     <div class="w-full h-full bg-gray-900 flex items-center justify-center">
                                         <i data-lucide="play" class="w-8 h-8 text-white/50"></i>

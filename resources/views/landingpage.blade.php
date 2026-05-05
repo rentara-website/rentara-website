@@ -443,9 +443,7 @@
                                 {{-- Image Container --}}
                                 <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-5">
                                     <img
-                                        src="{{ \Illuminate\Support\Str::startsWith($product->image_product->first()?->image_path, 'http')
-                                            ? $product->image_product->first()?->image_path
-                                            : asset('storage/' . $product->image_product->first()?->image_path) }}"
+                                        src="{{ $product->image_product->first()?->url }}"
                                         alt="{{ $product->nama_produk }}"
                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
 

@@ -21,14 +21,17 @@ class MediaController extends Controller
 
     public function destroyProductImage(\App\Models\ImageProduct $image)
     {
-        \Illuminate\Support\Facades\Storage::disk('public')->delete($image->image_path);
+        $image->deleteMediaIfCloudinary($image->image_path, 'image');
         $image->delete();
         return back()->with('success', 'Image deleted.');
     }
 
     public function destroyPortfolio(\App\Models\Portfolio $portfolio)
     {
-        \Illuminate\Support\Facades\Storage::disk('public')->delete($portfolio->file_path);
+        $portfolio->deleteMediaIfCloudinary(
+            $portfolio->file_path,
+            $portfolio->type === 'video' ? 'video' : 'image'
+        );
         $portfolio->delete();
         return back()->with('success', 'Media deleted.');
     }
