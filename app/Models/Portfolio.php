@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\HasCloudinaryMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,7 @@ class Portfolio extends Model
 {
     /** @use HasFactory<\Database\Factories\PortfolioFactory> */
     use HasFactory;
+    use HasCloudinaryMedia;
 
     protected $fillable = [
         'category_id',
@@ -18,6 +20,8 @@ class Portfolio extends Model
         'title'
     ];
 
+    protected $appends = ['url'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -26,5 +30,21 @@ class Portfolio extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function getUrlAttribute(): string
+    {
+        if ($this->type === 'video') {
+            return $this->resolveMediaUrl($this->file_path, [
+                'width' => 1280,
+                'quality' => 'auto',
+            ], 'video');
+        }
+
+        return $this->resolveMediaUrl($this->file_path, [
+            'width' => 1200,
+            'quality' => 'auto',
+            'fetch_format' => 'auto',
+        ]);
     }
 }

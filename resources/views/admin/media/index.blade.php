@@ -18,7 +18,7 @@
                 @foreach($productImages as $image)
                     <div
                         class="group relative bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 aspect-square">
-                        <img src="{{ Str::startsWith($image->image_path, 'http') ? $image->image_path : asset('storage/' . $image->image_path) }}"
+                        <img src="{{ $image->url }}"
                             class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center p-4 text-center">
@@ -45,7 +45,7 @@
                     <div
                         class="group relative bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 aspect-square">
                         @if($item->type === 'image')
-                            <img src="{{ Str::startsWith($item->file_path, 'http') ? $item->file_path : asset('storage/' . $item->file_path) }}"
+                            <img src="{{ $item->url }}"
                                 class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
                         @else
                             <div class="w-full h-full bg-gray-900 flex items-center justify-center">

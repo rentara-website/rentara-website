@@ -42,12 +42,12 @@
         <div class="masonry-grid">
             @foreach($portfolios as $item)
                 <div class="masonry-item group cursor-zoom-in"
-                     @click="openLightbox('{{ $item->type }}', '{{ $item->file_path }}', '{{ $item->title ?? 'Portofolio' }}', '{{ $item->product ? $item->product->nama_produk : '' }}', '{{ $item->category ? $item->category->name : '' }}')">
-                    
+                     @click="openLightbox('{{ $item->type }}', '{{ $item->url }}', '{{ $item->title ?? 'Portofolio' }}', '{{ $item->product ? $item->product->nama_produk : '' }}', '{{ $item->category ? $item->category->name : '' }}')">
+
                     @if($item->type === 'image')
-                        <img src="{{ $item->file_path }}" alt="{{ $item->title }}" class="w-full h-auto object-cover" loading="lazy">
+                        <img src="{{ $item->url }}" alt="{{ $item->title }}" class="w-full h-auto object-cover" loading="lazy">
                     @elseif($item->type === 'video')
-                        <video src="{{ $item->file_path }}" class="w-full h-auto object-cover" muted loop preload="metadata" onmouseover="this.play()" onmouseout="this.pause()"></video>
+                        <video src="{{ $item->url }}" class="w-full h-auto object-cover" muted loop preload="metadata" onmouseover="this.play()" onmouseout="this.pause()"></video>
                     @endif
 
                     {{-- Pinterest Style Overlay --}}

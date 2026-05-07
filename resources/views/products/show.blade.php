@@ -11,9 +11,7 @@
             <div class="w-full lg:w-1/2 relative group">
                 <div class="absolute inset-0 bg-[#0A4088]/5 rounded-3xl -rotate-2 transform group-hover:rotate-0 transition-transform duration-500"></div>
                 <div class="relative bg-gray-50 rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl shadow-[#0A4088]/10 border border-gray-100">
-                    <img src="{{ \Illuminate\Support\Str::startsWith($product->image_product->first()?->image_path, 'http')
-                    ? $product->image_product->first()?->image_path
-                    : asset('storage/' . $product->image_product->first()?->image_path) }}" alt="{{ $product->nama_produk }}" class="w-full h-auto max-h-125 object-contain transform group-hover:scale-105 transition-transform duration-700">
+                    <img src="{{ $product->image_product->first()?->url }}" alt="{{ $product->nama_produk }}" class="w-full h-auto max-h-125 object-contain transform group-hover:scale-105 transition-transform duration-700">
                     
                     {{-- Category Badge --}}
                     <div class="absolute top-6 left-6">
@@ -100,12 +98,12 @@
                 <div class="masonry-grid">
                     @foreach($product->portfolios as $item)
                         <div class="masonry-item group cursor-zoom-in"
-                             @click="openLightbox('{{ $item->type }}', '{{ $item->file_path }}', '{{ $item->title ?? 'Portofolio' }}', '{{ $product->nama_produk }}', '{{ $product->category->name }}')">
-                            
+                             @click="openLightbox('{{ $item->type }}', '{{ $item->url }}', '{{ $item->title ?? 'Portofolio' }}', '{{ $product->nama_produk }}', '{{ $product->category->name }}')">
+
                             @if($item->type === 'image')
-                                <img src="{{ $item->file_path }}" alt="{{ $item->title }}" class="w-full h-auto object-cover" loading="lazy">
+                                <img src="{{ $item->url }}" alt="{{ $item->title }}" class="w-full h-auto object-cover" loading="lazy">
                             @elseif($item->type === 'video')
-                                <video src="{{ $item->file_path }}" class="w-full h-auto object-cover" muted loop preload="metadata" onmouseover="this.play()" onmouseout="this.pause()"></video>
+                                <video src="{{ $item->url }}" class="w-full h-auto object-cover" muted loop preload="metadata" onmouseover="this.play()" onmouseout="this.pause()"></video>
                             @endif
 
                             {{-- Pinterest Style Overlay --}}

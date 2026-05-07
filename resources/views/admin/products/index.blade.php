@@ -45,7 +45,7 @@
                                 <div class="flex items-center gap-4">
                                     <div class="w-12 h-12 bg-gray-50 rounded-xl overflow-hidden border border-gray-100 flex items-center justify-center shrink-0">
                                         @if($product->image_product->isNotEmpty())
-                                            <img src="{{ Str::startsWith($product->image_product->first()->image_path, 'http') ? $product->image_product->first()->image_path : asset('storage/' . $product->image_product->first()->image_path) }}" alt="{{ $product->nama_produk }}"
+                                            <img src="{{ $product->image_product->first()->url }}" alt="{{ $product->nama_produk }}"
                                                 class="w-full h-full object-cover">
                                         @else
                                             <i data-lucide="image" class="w-6 h-6 text-gray-300"></i>

@@ -24,8 +24,8 @@
                     <div
                         class="group relative bg-white rounded-3xl border border-gray-100 p-4 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(8,112,184,0.1)] hover:-translate-y-2">
                         {{-- Image Container --}}
-                        <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-5">
-                            <img src="/images/Rectangle24.png" alt="{{ $product->nama_produk }}"
+                        <div class="relative overflow-hidden rounded-2xl aspect-4/3 mb-5">
+                            <img src="{{ $product->image_product->first()->url }}" alt="{{ $product->nama_produk }}"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
 
                             {{-- Category Badge --}}
