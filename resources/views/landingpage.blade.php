@@ -231,7 +231,7 @@
 
                 {{-- ITEM 2 — Easy Price Comparison --}}
                 <div
-                    class="relative rounded-3xl overflow-hidden bg-white border border-gray-100 p-7 sm:p-8 flex flex-col justify-between min-h-[220px] group hover:shadow-xl hover:border-[#0A4088]/20 transition-all duration-300">
+                    class="relative rounded-3xl overflow-hidden bg-white border border-gray-100 p-7 sm:p-8 flex flex-col justify-between min-h-55 group hover:shadow-xl hover:border-[#0A4088]/20 transition-all duration-300">
                     <div
                         class="absolute top-0 right-0 w-28 h-28 rounded-bl-full bg-[#0A4088]/5 group-hover:bg-[#0A4088]/10 transition-all duration-300">
                     </div>
@@ -254,7 +254,7 @@
 
                 {{-- ITEM 3 — Fast WhatsApp Booking --}}
                 <div
-                    class="relative rounded-3xl overflow-hidden bg-white border border-gray-100 p-7 sm:p-8 flex flex-col justify-between min-h-[220px] group hover:shadow-xl hover:border-[#0A4088]/20 transition-all duration-300">
+                    class="relative rounded-3xl overflow-hidden bg-white border border-gray-100 p-7 sm:p-8 flex flex-col justify-between min-h-55 group hover:shadow-xl hover:border-[#0A4088]/20 transition-all duration-300">
                     <div
                         class="absolute top-0 right-0 w-28 h-28 rounded-bl-full bg-green-50 group-hover:bg-green-100 transition-all duration-300">
                     </div>
@@ -287,7 +287,7 @@
                         items-start sm:items-center
                         gap-5 sm:gap-6 lg:gap-8
                         sm:col-span-2 lg:col-span-2
-                        min-h-[160px] sm:min-h-[180px] lg:min-h-[200px]
+                        min-h-40 sm:min-h-45 lg:min-h-50
                         group hover:shadow-xl hover:bg-[#0A4088]/10
                         transition-all duration-300">
 
@@ -313,7 +313,7 @@
 
                     <!-- Icon badge (tetap di kiri) -->
                     <div
-                        class="flex-shrink-0
+                        class="shrink-0
                             w-14 h-14 sm:w-16 sm:h-16
                             rounded-2xl bg-[#0A4088]
                             flex items-center justify-center
@@ -357,7 +357,7 @@
                         class="w-full text-left px-4 sm:px-6 py-3 sm:py-4 font-semibold text-sm sm:text-base text-gray-900 flex justify-between items-center hover:text-[#0A4088] transition-colors">
                         How do I book a rental through Rentara?
                         <i data-lucide="chevron-down" x-bind:class="open === 1 ? 'rotate-180' : ''"
-                            class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 transition-transform duration-300 flex-shrink-0 ml-2"></i>
+                            class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 transition-transform duration-300 shrink-0 ml-2"></i>
                     </button>
                     <div x-show="open === 1" x-transition
                         class="px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base text-gray-600 border-t border-gray-200 bg-gray-50 leading-relaxed">
@@ -373,7 +373,7 @@
                         class="w-full text-left px-4 sm:px-6 py-3 sm:py-4 font-semibold text-sm sm:text-base text-gray-900 flex justify-between items-center hover:text-[#0A4088] transition-colors">
                         How do I book a Photographer/Videographer?
                         <i data-lucide="chevron-down" x-bind:class="open === 2 ? 'rotate-180' : ''"
-                            class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 transition-transform duration-300 flex-shrink-0 ml-2"></i>
+                            class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 transition-transform duration-300 shrink-0 ml-2"></i>
                     </button>
                     <div x-show="open === 2" x-transition
                         class="px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base text-gray-600 border-t border-gray-200 bg-gray-50 leading-relaxed">
@@ -389,7 +389,7 @@
                         class="w-full text-left px-4 sm:px-6 py-3 sm:py-4 font-semibold text-sm sm:text-base text-gray-900 flex justify-between items-center hover:text-[#0A4088] transition-colors">
                         Are the rental providers on Rentara verified?
                         <i data-lucide="chevron-down" x-bind:class="open === 3 ? 'rotate-180' : ''"
-                            class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 transition-transform duration-300 flex-shrink-0 ml-2"></i>
+                            class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 transition-transform duration-300 shrink-0 ml-2"></i>
                     </button>
                     <div x-show="open === 3" x-transition
                         class="px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base text-gray-600 border-t border-gray-200 bg-gray-50 leading-relaxed">
@@ -405,7 +405,7 @@
                         class="w-full text-left px-4 sm:px-6 py-3 sm:py-4 font-semibold text-sm sm:text-base text-gray-900 flex justify-between items-center hover:text-[#0A4088] transition-colors">
                         Do I pay through Rentara or the rental provider?
                         <i data-lucide="chevron-down" x-bind:class="open === 4 ? 'rotate-180' : ''"
-                            class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 transition-transform duration-300 flex-shrink-0 ml-2"></i>
+                            class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 transition-transform duration-300 shrink-0 ml-2"></i>
                     </button>
                     <div x-show="open === 4" x-transition
                         class="px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base text-gray-600 border-t border-gray-200 bg-gray-50 leading-relaxed">
@@ -441,9 +441,9 @@
                             <div
                                 class="group relative bg-white rounded-3xl border border-gray-100 p-4 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(8,112,184,0.1)] hover:-translate-y-2">
                                 {{-- Image Container --}}
-                                <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-5">
+                                <div class="relative overflow-hidden rounded-2xl aspect-4/3 mb-5">
                                     <img
-                                        src="{{ $product->image_product->first()?->url }}"
+                                        src="{{ $product->image_product->first()->url }}"
                                         alt="{{ $product->nama_produk }}"
                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
 
