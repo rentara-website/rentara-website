@@ -179,6 +179,7 @@ class ProductController extends Controller
                 $product->tags()->sync($request->tags);
             }
 
+
             if ($request->has('delete_portfolios')) {
                 foreach ($request->delete_portfolios as $portfolioId) {
                     $portfolio = Portfolio::find($portfolioId);

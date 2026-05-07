@@ -15,7 +15,7 @@
         </a>
     </div>
 
-    <form action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+    <form action="{{ route('admin.products.update', $product->slug) }}" method="POST" enctype="multipart/form-data" class="space-y-8">
         @csrf
         @method('PUT')
         
@@ -27,15 +27,15 @@
                 <div class="space-y-2">
                     <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Product Name</label>
                     <input type="text" name="nama_produk" value="{{ $product->nama_produk }}" required
-                           class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
+                        class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
                 </div>
                 
                 <div class="space-y-2">
                     <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Price (Per Day)</label>
                     <div class="relative">
                         <span class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold">Rp</span>
-                        <input type="number" name="harga" value="{{ $product->harga }}" required
-                               class="w-full bg-gray-50 border border-gray-100 rounded-2xl pl-12 pr-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
+                        <input type="number" name="harga" value="{{ $product->harga }}" required min="100000" step="10000"
+                            class="w-full bg-gray-50 border border-gray-100 rounded-2xl pl-12 pr-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
             <div class="space-y-2">
                 <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Description</label>
                 <textarea name="deskripsi" required rows="5"
-                          class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">{{ $product->deskripsi }}</textarea>
+                        class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">{{ $product->deskripsi }}</textarea>
             </div>
         </div>
 
@@ -87,7 +87,7 @@
                     </div>
                 @endif
                 <input type="file" name="product_image" accept="image/jpeg,image/png,image/webp"
-                       class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
+                    class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
             </div>
 
             <!-- Portfolio Images -->
@@ -100,7 +100,7 @@
                     <p class="text-xs text-gray-500 mb-2">Select assets you want to <span class="text-red-500 font-bold">delete</span> upon saving.</p>
                     <div class="flex flex-wrap gap-4">
                         @foreach($product->portfolios as $portfolio)
-                            <label class="relative group w-24 h-24 rounded-xl overflow-hidden border-2 border-transparent cursor-pointer hover:border-red-500 transition-colors has-[:checked]:border-red-500 has-[:checked]:opacity-50">
+                            <label class="relative group w-24 h-24 rounded-xl overflow-hidden border-2 border-transparent cursor-pointer hover:border-red-500 transition-colors has-checked:border-red-500 has-checked:opacity-50">
                                 <input type="checkbox" name="delete_portfolios[]" value="{{ $portfolio->id }}" class="peer sr-only">
                                 @if($portfolio->type === 'image')
                                     <img src="{{ $portfolio->url }}" class="w-full h-full object-cover">
