@@ -5,18 +5,18 @@
         {{-- Header Section --}}
         <div class="header z-10 relative mb-12">
             <div class="title-container mt-4 sm:mt-6 lg:mt-8">
-                <h1 class="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-[#0A4088]">What We
-                    Bring?</h1>
+                <h1 class="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-[#0A4088]">Apa yang Kami
+                    Tawarkan?</h1>
                 <p
                     class="text-lg sm:text-xl md:text-2xl text-center max-w-4xl mx-auto mt-4 sm:mt-6 lg:mt-8 text-gray-600 leading-relaxed">
-                    Making it easier to find and rent the gear you need, whenever you need them.
+                    Membuat lebih mudah untuk menemukan dan menyewa gear yang Anda butuhkan, kapan pun Anda membutuhkannya.
                 </p>
             </div>
 
             <form id="search-form" action="{{ url('/products') }}" method="GET" class="mt-10 sm:mt-12 lg:mt-14">
                 <div class="relative max-w-2xl mx-auto group">
                     <input type="text" name="search" id="search-input"
-                        placeholder="Search for gear, cameras, or accessories..." value="{{ $search ?? '' }}"
+                        placeholder="Cari gear, kamera, atau aksesoris..." value="{{ $search ?? '' }}"
                         class="w-full pl-14 pr-12 py-4 rounded-2xl border-2 border-gray-100 focus:border-[#0A4088] focus:ring-0 shadow-lg transition-all duration-300 text-lg"
                         autocomplete="off">
                     <i data-lucide="search" class="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400"></i>
@@ -37,13 +37,13 @@
                     {{-- Categories --}}
                     <div>
                         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <i data-lucide="layers" class="w-5 h-5 text-[#0A4088]"></i> Categories
+                            <i data-lucide="layers" class="w-5 h-5 text-[#0A4088]"></i> Kategori
                         </h3>
                         <div class="flex flex-wrap lg:flex-col gap-2">
                             <a href="{{ url('/products') . ($search ? '?search=' . $search : '') }}"
                                 data-url="{{ url('/products') . ($search ? '?search=' . $search : '') }}" data-cat-slug=""
                                 class="filter-link cat-link px-4 py-2.5 rounded-xl border bg-white text-gray-600 border-gray-200 hover:border-[#0A4088] hover:text-[#0A4088] transition-all duration-300 {{ !$activeCategory ? 'filter-active' : '' }}">
-                                All Categories
+                                Semua Kategori
                             </a>
                             @foreach($categories as $category)
                                 <a href="{{ url('/products?category=' . $category->slug . ($search ? '&search=' . $search : '') . ($activeTag ? '&tag=' . $activeTag : '')) }}"
@@ -59,7 +59,7 @@
                     {{-- Tags --}}
                     <div>
                         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <i data-lucide="tag" class="w-5 h-5 text-[#0A4088]"></i> Popular Tags
+                            <i data-lucide="tag" class="w-5 h-5 text-[#0A4088]"></i> Tag Populer
                         </h3>
                         <div class="flex flex-wrap gap-2">
                             @foreach($tags as $tag)
@@ -78,7 +78,7 @@
                         <div id="reset-container" class="pt-4 border-t border-gray-100">
                             <a href="{{ url('/products') }}" data-url="{{ url('/products') }}"
                                 class="filter-link flex items-center justify-center gap-2 w-full py-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-colors font-semibold">
-                                <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset All Filters
+                                <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Bersihkan Filter
                             </a>
                         </div>
                     @endif

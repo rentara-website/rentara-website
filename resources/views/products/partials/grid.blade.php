@@ -3,10 +3,10 @@
         <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
             <i data-lucide="package-search" class="w-10 h-10 text-gray-300"></i>
         </div>
-        <h2 class="text-2xl font-bold text-gray-900">No products found</h2>
-        <p class="text-gray-500 mt-2">Try adjusting your filters or search terms.</p>
+        <h2 class="text-2xl font-bold text-gray-900">Tidak ada produk yang ditemukan</h2>
+        <p class="text-gray-500 mt-2">Coba sesuaikan filter atau kata kunci pencarian Anda.</p>
         <a href="{{ url('/products') }}" class="mt-6 inline-block text-[#0A4088] font-bold underline filter-link"
-            data-url="{{ url('/products') }}">Clear all filters</a>
+            data-url="{{ url('/products') }}">Bersihkan semua filter</a>
     </div>
 @else
     @foreach ($groupedProducts as $categoryName => $categoryProducts)
@@ -42,7 +42,7 @@
                                 <a href="https://wa.me/6281938092473?text=Halooo Saya tertarik menyewa {{ $product->nama_produk }} dari websitemu. Tolong berikan saya detail barangnya?"
                                     target="_blank"
                                     class="bg-white text-[#0A4088] px-6 py-2.5 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                    Rent Now
+                                    Sewa Sekarang
                                 </a>
                             </div>
                         </div>
@@ -72,16 +72,16 @@
                             {{-- Footer --}}
                             <div class="flex items-center justify-between pt-4 border-t border-gray-50">
                                 <div>
-                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Starting from</p>
+                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Harga Mulai dari</p>
                                     <div class="flex items-baseline gap-1">
                                         <span class="text-xl font-black text-[#0A4088] animate-pulse">Rp
                                             {{ number_format($product->harga, 0, ',', '.') }}</span>
-                                        <span class="text-xs text-gray-400 font-medium">/day</span>
+                                        <span class="text-xs text-gray-400 font-medium">/hari</span>
                                     </div>
                                 </div>
                                 <a href="{{ route('products.show', $product->slug) }}"
                                     class="px-4 py-2 bg-[#0A4088]/5 text-[#0A4088] text-xs font-bold rounded-lg hover:bg-[#0A4088] hover:text-white transition-all duration-300">
-                                    Details
+                                    Lihat Detail
                                 </a>
                             </div>
                         </div>

@@ -37,22 +37,22 @@
                 {{-- Price & Action --}}
                 <div class="bg-gray-50 rounded-2xl p-6 md:p-8 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                     <div>
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Rental Price</p>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Harga Rental</p>
                         <div class="flex items-baseline gap-1">
                             <span class="text-3xl font-black text-[#0A4088]">Rp {{ number_format($product->harga, 0, ',', '.') }}</span>
-                            <span class="text-sm text-gray-400 font-bold uppercase tracking-widest">/ Day</span>
+                            <span class="text-sm text-gray-400 font-bold uppercase tracking-widest">/ Hari</span>
                         </div>
                     </div>
                     
                     <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa ' . $product->nama_produk) }}" target="_blank" class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95">
                         <i data-lucide="message-circle" class="w-6 h-6"></i>
-                        Rent Now
+                        Sewa Sekarang
                     </a>
                 </div>
 
                 {{-- Description --}}
                 <div class="space-y-4">
-                    <h3 class="text-lg font-bold text-gray-900 border-b-2 border-[#0A4088] w-fit pb-1">About this Gear</h3>
+                    <h3 class="text-lg font-bold text-gray-900 border-b-2 border-[#0A4088] w-fit pb-1">Tentang Produk</h3>
                     <p class="text-gray-600 leading-relaxed text-lg">
                         {{ $product->deskripsi }}
                     </p>
@@ -80,7 +80,7 @@
             {{-- Section Header --}}
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-black text-[#0A4088] mb-4">Our Work Portfolio</h2>
+                    <h2 class="text-3xl md:text-4xl font-black text-[#0A4088] mb-4">Portofolio Kami</h2>
                     <p class="text-gray-500 max-w-xl">
                         Hasil karya otentik yang dihasilkan menggunakan gear ini oleh tim profesional kami.
                     </p>
@@ -91,8 +91,8 @@
             @if($product->portfolios->isEmpty())
                 <div class="text-center py-20 bg-white rounded-3xl border border-dashed border-gray-200">
                     <i data-lucide="image-off" class="w-16 h-16 text-gray-300 mx-auto mb-4"></i>
-                    <h2 class="text-xl font-bold text-gray-700">No portfolio items yet</h2>
-                    <p class="text-gray-400 mt-2">Projects will be updated soon.</p>
+                    <h2 class="text-xl font-bold text-gray-700">Belum ada item portofolio</h2>
+                    <p class="text-gray-400 mt-2">Proyek akan diperbarui segera.</p>
                 </div>
             @else
                 <div class="masonry-grid">
@@ -140,7 +140,7 @@
     {{-- Breadcrumbs / Back Navigation --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <a href="{{ url('/products') }}" class="inline-flex items-center gap-2 px-8 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-2xl transition-all">
-            <i data-lucide="arrow-left" class="w-5 h-5"></i> Back to Products
+            <i data-lucide="arrow-left" class="w-5 h-5"></i> Kembali ke Produk
         </a>
     </div>
 

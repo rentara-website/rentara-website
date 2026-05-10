@@ -12,15 +12,15 @@
         <div class="navbar-list hidden md:flex items-center gap-6 lg:gap-10 font-bold text-base md:text-lg">
             <div
                 class="navbar-items {{$title === 'Home' ? 'text-white bg-[#0A4088] rounded-full px-4 sm:px-6 lg:px-7 py-2' : ''}}">
-                <a href="/" class="hover:text-[#0A4088] transition">Home</a>
+                <a href="/" class="hover:text-[#0A4088] transition">Beranda</a>
             </div>
             <div
                 class="navbar-items {{$title === 'Products' ? 'text-white bg-[#0A4088] rounded-full px-4 sm:px-6 lg:px-7 py-2' : ''}}">
-                <a href="/products" class="hover:text-[#0A4088] transition">Products</a>
+                <a href="/products" class="hover:text-[#0A4088] transition">Produk</a>
             </div>
             <div class="navbar-items">
                 <a href="https://wa.me/6281938092473?text=Haloo saya ingin bertanya tentang Rentara. " target="_blank"
-                    class="hover:text-[#0A4088] transition">Contact Us</a>
+                    class="hover:text-[#0A4088] transition">Hubungi Kami</a>
             </div>
 
             <!-- Navigation Links -->
@@ -37,11 +37,11 @@
                         @csrf
                         <button type="submit" class="text-red-500 font-bold hover:text-red-700 transition text-sm flex items-center gap-2">
                             <i data-lucide="log-out" class="w-4 h-4"></i>
-                            Logout
+                            Keluar
                         </button>
                     </form>
                 @else
-                    <a href="/login" class="bg-[#0A4088] text-white px-5 py-2 rounded-full hover:bg-[#08306b] transition text-sm font-bold shadow-md shadow-[#0A4088]/20">Sign In</a>
+                    <a href="/login" class="bg-[#0A4088] text-white px-5 py-2 rounded-full hover:bg-[#08306b] transition text-sm font-bold shadow-md shadow-[#0A4088]/20">Masuk</a>
                 @endauth
             </div>
         </div>
@@ -64,9 +64,9 @@
     <div id="mobile-menu" class="hidden md:hidden ">
         <div class="flex flex-col gap-0 py-2 text-black">
 
-            <a href="/" class="py-3 border-b border-gray-100 hover:text-[#0A4088] transition">Home</a>
-            <a href="/products" class="py-3 border-b border-gray-100 hover:text-[#0A4088] transition">Products</a>
-            <a href="{{route("whatsapp.rent") . "?text=Haloo saya ingin bertanya tentang Rentara."}}" target="_blank" class="py-3 hover:text-[#0A4088] transition border-b border-gray-100">Contact Us</a>
+            <a href="/" class="py-3 border-b border-gray-100 hover:text-[#0A4088] transition">Beranda</a>
+            <a href="/products" class="py-3 border-b border-gray-100 hover:text-[#0A4088] transition">Produk</a>
+            <a href="{{route("whatsapp.rent") . "?text=Haloo saya ingin bertanya tentang Rentara."}}" target="_blank" class="py-3 hover:text-[#0A4088] transition border-b border-gray-100">Hubungi Kami</a>
 
             <!-- Mobile Navigation -->
             @auth

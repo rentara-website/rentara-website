@@ -10,14 +10,11 @@
                     <img src="/images/Rentara-removebg-preview1.png" alt="Rentara Logo" class="w-20 sm:w-24 ">
                 </a>
                 <p class="text-white/70 text-sm sm:text-base leading-relaxed max-w-xs">
-                    Your one-stop platform for cameras, content gear, and creators in Bali. Rent with confidence.
+                    Rentara adalah platform Bali untuk menyewa kamera dan gear konten, serta terhubung dengan fotografer
+                    dan videografer profesional.
                 </p>
                 {{-- Social Icons --}}
                 <div class="flex items-center gap-4 mt-2">
-                    <a href="mailto:" title="Email"
-                        class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition-all duration-200">
-                        <i data-lucide="mail" class="w-4 h-4 text-white"></i>
-                    </a>
                     <a href="{{route('whatsapp.rent') . "?text=Hi Saya ingin bertanya mengenai Rentara."}}" target="_blank" title="WhatsApp"
                         class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition-all duration-200">
                         <i data-lucide="phone" class="w-4 h-4 text-white"></i>
@@ -36,14 +33,14 @@
 
             {{-- Col 2: Navigation --}}
             <div class="flex flex-col gap-4">
-                <h3 class="text-white font-bold text-base sm:text-lg tracking-wide uppercase">Quick Links</h3>
+                <h3 class="text-white font-bold text-base sm:text-lg tracking-wide uppercase">Navigasi</h3>
                 <ul class="flex flex-col gap-3">
                     <li>
                         <a href="/"
                             class="text-white/70 hover:text-white text-sm sm:text-base transition-colors duration-200 flex items-center gap-2 group">
                             <i data-lucide="chevron-right"
                                 class="w-4 h-4 text-white/40 group-hover:text-white/80 transition-colors"></i>
-                            Home
+                            Beranda
                         </a>
                     </li>
                     <li>
@@ -51,7 +48,7 @@
                             class="text-white/70 hover:text-white text-sm sm:text-base transition-colors duration-200 flex items-center gap-2 group">
                             <i data-lucide="chevron-right"
                                 class="w-4 h-4 text-white/40 group-hover:text-white/80 transition-colors"></i>
-                            Products
+                            Produk
                         </a>
                     </li>
                     <li>
@@ -60,7 +57,7 @@
                             class="text-white/70 hover:text-white text-sm sm:text-base transition-colors duration-200 flex items-center gap-2 group">
                             <i data-lucide="chevron-right"
                                 class="w-4 h-4 text-white/40 group-hover:text-white/80 transition-colors"></i>
-                            Contact Us
+                            Hubungi Kami
                         </a>
                     </li>
                 </ul>
@@ -68,7 +65,7 @@
 
             {{-- Col 3: Contact Info --}}
             <div class="flex flex-col gap-4">
-                <h3 class="text-white font-bold text-base sm:text-lg tracking-wide uppercase">Contact</h3>
+                <h3 class="text-white font-bold text-base sm:text-lg tracking-wide uppercase">Kontak</h3>
                 <ul class="flex flex-col gap-4">
                     <li class="flex items-center gap-3">
                         <div
