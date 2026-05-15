@@ -12,11 +12,14 @@
     @foreach ($groupedProducts as $categoryName => $categoryProducts)
         <div class="mb-12">
             <div class="flex items-center justify-between mb-8">
-                <h2 class="text-2xl font-extrabold text-[#0A4088] flex items-center gap-3">
+                <a href="{{ route('products', ['category' => $categoryProducts->first()->category->slug]) }}"
+                    class="text-2xl font-extrabold text-[#0A4088] flex items-center gap-3 group">
                     <span class="w-2 h-8 bg-[#0A4088] rounded-full"></span>
                     {{ $categoryName }}
-                    <span class="text-sm font-normal text-gray-400">({{ count($categoryProducts) }} items)</span>
-                </h2>
+                    <span
+                        class="text-sm font-normal text-gray-400 transition-transform duration-300 group-hover:translate-x-1">({{ count($categoryProducts) }}
+                        items)</span>
+                </a>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -25,8 +28,13 @@
                         class="group relative bg-white rounded-3xl border border-gray-100 p-4 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(8,112,184,0.1)] hover:-translate-y-2">
                         {{-- Image Container --}}
                         <div class="relative overflow-hidden rounded-2xl aspect-4/3 mb-5">
-                            <img src="{{ $product->image_product->first()->url }}" alt="{{ $product->nama_produk }}"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            @if($product->image)
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->nama_produk }}"
+                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            @else
+                                <img src="{{ asset('images/Rectangle24.png') }}" alt="{{ $product->nama_produk }}"
+                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            @endif
 
                             {{-- Category Badge --}}
                             <div class="absolute top-4 left-4">
@@ -62,8 +70,7 @@
                                 @foreach ($product->tags as $tag)
                                     <a href="{{ url('/products?tag=' . $tag->slug) }}"
                                         class="text-[10px] font-bold text-gray-400 bg-gray-50 px-2 py-1 rounded-md hover:bg-gray-100 hover:text-[#0A4088] transition-colors filter-link"
-                                        data-url="{{ url('/products?tag=' . $tag->slug) }}"
-                                        data-tag-slug="{{ $tag->slug }}">
+                                        data-url="{{ url('/products?tag=' . $tag->slug) }}" data-tag-slug="{{ $tag->slug }}">
                                         #{{ $tag->name }}
                                     </a>
                                 @endforeach
@@ -72,7 +79,8 @@
                             {{-- Footer --}}
                             <div class="flex items-center justify-between pt-4 border-t border-gray-50">
                                 <div>
-                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Harga Mulai dari</p>
+                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Harga Mulai dari
+                                    </p>
                                     <div class="flex items-baseline gap-1">
                                         <span class="text-xl font-black text-[#0A4088] animate-pulse">Rp
                                             {{ number_format($product->harga, 0, ',', '.') }}</span>

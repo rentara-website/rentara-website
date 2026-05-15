@@ -31,14 +31,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get("wa.me/6281234567890", function () {
-    return redirect("https://wa.me/6281234567890");
+Route::get("wa.me/628132849766", function () {
+    return redirect("https://wa.me/628132849766");
 })->name('whatsapp.rent');
 
 Route::get("/products", [ProductController::class, 'index']);
 Route::get("/product/{product}", [ProductController::class, 'show'])->name('products.show');
-Route::get("/portfolio", [PortfolioController::class, 'index']);
-
 
 // Guest routes (no auth required)
 Route::get('/login', [LoginController::class, 'show'])->name('login');
@@ -61,12 +59,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/email/verify', function () {
         return view('auth.verify-email', ['title' => 'Verify Your Email']);
     })->name('verification.notice');
-    
+
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
         return redirect('/profile');
     })->middleware(['signed'])->name('verification.verify');
-    
+
     Route::post('/email/verification-notification', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
         return back()->with('message', 'Verification link sent!');
@@ -102,11 +100,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::patch('/users/{user}/role', [UserController::class, 'toggleRole'])->name('users.toggleRole');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-
-    // Media Library
-    Route::get('/media', [\App\Http\Controllers\Admin\MediaController::class, 'index'])->name('media.index');
-    Route::delete('/media/image/{image}', [\App\Http\Controllers\Admin\MediaController::class, 'destroyProductImage'])->name('media.destroyImage');
-    Route::delete('/media/portfolio/{portfolio}', [\App\Http\Controllers\Admin\MediaController::class, 'destroyPortfolio'])->name('media.destroyPortfolio');
 
     // Tag Management
     Route::resource('/tags', TagController::class);

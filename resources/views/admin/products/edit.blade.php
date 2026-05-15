@@ -74,61 +74,22 @@
         <div class="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm space-y-6">
             <h3 class="text-xl font-bold text-gray-900 border-b border-gray-50 pb-4">Media Assets</h3>
             
-            <!-- Main Image -->
-            <div class="space-y-4">
-                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Main Product Image</label>
-                @if($product->image_product->isNotEmpty())
-                    <div class="flex items-center gap-4 p-4 border border-gray-100 rounded-2xl bg-gray-50">
-                        <img src="{{ $product->image_product->first()->url }}" class="w-20 h-20 rounded-xl object-cover">
-                        <div class="flex-1">
-                            <p class="text-sm font-bold text-gray-900">Current Image</p>
-                            <p class="text-xs text-gray-500 mt-1">Upload a new image below to automatically replace this.</p>
-                        </div>
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Product Image (Optional)</label>
+                @if($product->image)
+                    <div class="mb-4">
+                        <img src="{{ asset('storage/' . $product->image) }}" class="w-32 h-32 object-cover rounded-2xl border border-gray-200">
                     </div>
                 @endif
-                <input type="file" name="product_image" accept="image/jpeg,image/png,image/webp"
-                    class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
+                <input type="file" name="image" accept="image/*"
+                       class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#0A4088]/10 file:text-[#0A4088] hover:file:bg-[#0A4088]/20">
+                <p class="text-[10px] text-gray-400 mt-1">Upload a new image to replace the current one, or leave empty.</p>
             </div>
 
-            <!-- Portfolio Images -->
-            <div class="space-y-4 pt-6 border-t border-gray-50">
-                <div class="flex items-center justify-between">
-                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Portfolio Assets</label>
-                </div>
-                
-                @if($product->portfolios->isNotEmpty())
-                    <p class="text-xs text-gray-500 mb-2">Select assets you want to <span class="text-red-500 font-bold">delete</span> upon saving.</p>
-                    <div class="flex flex-wrap gap-4">
-                        @foreach($product->portfolios as $portfolio)
-                            <label class="relative group w-24 h-24 rounded-xl overflow-hidden border-2 border-transparent cursor-pointer hover:border-red-500 transition-colors has-checked:border-red-500 has-checked:opacity-50">
-                                <input type="checkbox" name="delete_portfolios[]" value="{{ $portfolio->id }}" class="peer sr-only">
-                                @if($portfolio->type === 'image')
-                                    <img src="{{ $portfolio->url }}" class="w-full h-full object-cover">
-                                @else
-                                    <div class="w-full h-full bg-gray-900 flex items-center justify-center">
-                                        <i data-lucide="play" class="w-8 h-8 text-white/50"></i>
-                                    </div>
-                                @endif
-                                <div class="absolute inset-0 bg-red-500/80 opacity-0 peer-checked:opacity-100 transition flex items-center justify-center">
-                                    <i data-lucide="trash-2" class="w-6 h-6 text-white"></i>
-                                </div>
-                            </label>
-                        @endforeach
-                    </div>
-                @endif
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <div class="space-y-2">
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest">Add Portfolio Images</label>
-                        <input type="file" name="portfolio_images[]" multiple accept="image/jpeg,image/png,image/webp"
-                               class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest">Add Portfolio Videos</label>
-                        <input type="file" name="portfolio_videos[]" multiple accept="video/mp4,video/quicktime,video/x-msvideo"
-                               class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
-                    </div>
-                </div>
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Portfolio Link</label>
+                <input type="url" name="link_portofolio" value="{{ $product->link_portofolio }}" placeholder="https://..."
+                       class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
             </div>
         </div>
 

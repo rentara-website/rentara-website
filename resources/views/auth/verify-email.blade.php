@@ -10,12 +10,12 @@
         <h2 class="text-2xl font-black text-gray-900 mb-4">Verify Your Email</h2>
         
         <p class="text-gray-500 mb-6 leading-relaxed">
-            Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you?
+            Terima kasih telah mendaftar! Sebelum memulai, silakan verifikasi alamat email Anda dengan mengklik tombol di bawah ini untuk mengirimkan link verifikasi ke email Anda.
         </p>
 
         @if (session('message'))
             <div class="mb-6 font-medium text-sm text-green-600 bg-green-50 p-3 rounded-xl border border-green-200">
-                A new verification link has been sent to the email address you provided during registration.
+                Link verifikasi telah dikirimkan ke alamat email Anda.
             </div>
         @endif
 
@@ -23,7 +23,7 @@
             <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
                 <button type="submit" class="w-full bg-[#0A4088] hover:bg-[#08306b] text-white font-bold py-3 px-6 rounded-2xl transition-colors shadow-lg shadow-[#0A4088]/30">
-                    Resend Verification Email
+                    Kirim Email Verifikasi
                 </button>
             </form>
 

@@ -92,51 +92,21 @@
             </div>
         </div>
 
-        <!-- Media Upload -->
-        <div class="bg-white p-6 sm:p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm space-y-8">
+        <!-- Media & Assets -->
+        <div class="bg-white p-6 sm:p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm space-y-6">
             <h3 class="text-xl font-bold text-gray-900 border-b border-gray-50 pb-4">Media & Assets</h3>
             
-            <!-- Main Featured Image -->
-            <div class="space-y-4">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Main Featured Image</label>
-                        <p class="text-[10px] text-gray-400">This will be the primary image for the product.</p>
-                    </div>
-                </div>
-                <div id="product_image_container" class="relative group h-48 sm:h-64 bg-gray-50 border-2 border-dashed border-gray-200 rounded-3xl flex flex-col items-center justify-center transition hover:border-[#0A4088] hover:bg-[#0A4088]/5 overflow-hidden">
-                    <input type="file" id="product_image_input" name="product_image" required accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer z-10 w-full h-full">
-                    <div id="product_image_placeholder" class="flex flex-col items-center justify-center text-center px-4 pointer-events-none">
-                        <i data-lucide="image-plus" class="w-10 h-10 text-gray-300 group-hover:text-[#0A4088] transition mb-2"></i>
-                        <p class="text-xs font-bold text-gray-400 group-hover:text-[#0A4088]">Click or drag to upload featured image</p>
-                    </div>
-                </div>
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Product Image (Optional)</label>
+                <input type="file" name="image" accept="image/*"
+                       class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#0A4088]/10 file:text-[#0A4088] hover:file:bg-[#0A4088]/20">
+                <p class="text-[10px] text-gray-400 mt-1">Leave empty to use default placeholder.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
-                <!-- Portfolio Images -->
-                <div class="space-y-4">
-                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Portfolio Images (Optional)</label>
-                    <div id="portfolio_images_container" class="relative h-32 sm:h-40 bg-gray-50 border-2 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center transition hover:border-[#0A4088] overflow-hidden">
-                        <input type="file" id="portfolio_images_input" name="portfolio_images[]" multiple accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer z-10 w-full h-full">
-                        <div id="portfolio_images_placeholder" class="flex flex-col items-center justify-center text-center px-4 pointer-events-none">
-                            <i data-lucide="images" class="w-6 h-6 text-gray-300 mb-1"></i>
-                            <p class="text-[10px] font-bold text-gray-400">Click or drag images here<br>Multiple allowed</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Portfolio Videos -->
-                <div class="space-y-4">
-                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Portfolio Videos (Optional)</label>
-                    <div id="portfolio_videos_container" class="relative h-32 sm:h-40 bg-gray-50 border-2 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center transition hover:border-[#0A4088] overflow-hidden">
-                        <input type="file" id="portfolio_videos_input" name="portfolio_videos[]" multiple accept="video/mp4,video/quicktime" class="absolute inset-0 opacity-0 cursor-pointer z-10 w-full h-full">
-                        <div id="portfolio_videos_placeholder" class="flex flex-col items-center justify-center text-center px-4 pointer-events-none">
-                            <i data-lucide="video" class="w-6 h-6 text-gray-300 mb-1"></i>
-                            <p class="text-[10px] font-bold text-gray-400">Click or drag videos here<br>MP4, MOV supported</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Portfolio Link</label>
+                <input type="url" name="link_portofolio" value="{{ old('link_portofolio') }}" placeholder="https://..."
+                       class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">
             </div>
         </div>
 
@@ -149,108 +119,4 @@
     </form>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    function setupPreview(inputId, containerId, placeholderId, isMultiple = false, isVideo = false) {
-        const input = document.getElementById(inputId);
-        const container = document.getElementById(containerId);
-        const placeholder = document.getElementById(placeholderId);
-        
-        if (!input || !container || !placeholder) return;
-
-        // Visual feedback for drag and drop
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            container.addEventListener(eventName, preventDefaults, false);
-        });
-
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        ['dragenter', 'dragover'].forEach(eventName => {
-            container.addEventListener(eventName, highlight, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            container.addEventListener(eventName, unhighlight, false);
-        });
-
-        function highlight(e) {
-            container.classList.add('border-[#0A4088]', 'bg-[#0A4088]/5');
-        }
-
-        function unhighlight(e) {
-            container.classList.remove('border-[#0A4088]', 'bg-[#0A4088]/5');
-        }
-
-        container.addEventListener('drop', handleDrop, false);
-
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            input.files = files; // Update input files
-            handleFiles(files);
-        }
-
-        input.addEventListener('change', function() {
-            handleFiles(this.files);
-        });
-
-        function handleFiles(files) {
-            // Remove existing previews
-            const existingPreviews = container.querySelectorAll('.preview-item');
-            existingPreviews.forEach(el => el.remove());
-
-            if (files.length === 0) {
-                placeholder.classList.remove('hidden');
-                placeholder.classList.add('flex');
-                return;
-            }
-
-            // Hide placeholder
-            placeholder.classList.add('hidden');
-            placeholder.classList.remove('flex');
-
-            if (!isMultiple) {
-                // Single preview
-                const file = files[0];
-                if (file.type.startsWith('image/')) {
-                    const img = document.createElement('img');
-                    img.src = URL.createObjectURL(file);
-                    img.className = 'preview-item absolute inset-0 w-full h-full object-cover z-0 pointer-events-none rounded-2xl';
-                    container.appendChild(img);
-                }
-            } else {
-                // Multiple previews grid
-                const grid = document.createElement('div');
-                grid.className = 'preview-item absolute inset-0 w-full h-full overflow-y-auto p-2 grid grid-cols-3 sm:grid-cols-4 gap-2 z-0 pointer-events-none';
-                
-                Array.from(files).forEach(file => {
-                    const item = document.createElement('div');
-                    item.className = 'relative aspect-square bg-gray-100 rounded-lg overflow-hidden border border-gray-200';
-                    
-                    if (isVideo || file.type.startsWith('video/')) {
-                        const iconHtml = `<div class="flex flex-col items-center justify-center h-full p-2 bg-gray-800 text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 mb-1 opacity-70"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg><span class="text-[8px] text-center w-full truncate px-1">${file.name}</span></div>`;
-                        item.innerHTML = iconHtml;
-                    } else if (file.type.startsWith('image/')) {
-                        const img = document.createElement('img');
-                        img.src = URL.createObjectURL(file);
-                        img.className = 'w-full h-full object-cover';
-                        item.appendChild(img);
-                    }
-                    
-                    grid.appendChild(item);
-                });
-                
-                container.appendChild(grid);
-            }
-        }
-    }
-
-    setupPreview('product_image_input', 'product_image_container', 'product_image_placeholder', false, false);
-    setupPreview('portfolio_images_input', 'portfolio_images_container', 'portfolio_images_placeholder', true, false);
-    setupPreview('portfolio_videos_input', 'portfolio_videos_container', 'portfolio_videos_placeholder', true, true);
-});
-</script>
 @endsection

@@ -37,18 +37,12 @@ class DatabaseSeeder extends Seeder
             $product->tags()->attach($randomTags);
         }
 
-        // 5. Create Image mappings
-        \App\Models\ImageProduct::factory(20)->create();
-
-        // 6. Ensure Product Slugs are filled
+        // 5. Ensure Product Slugs are filled
         foreach (\App\Models\Product::all() as $product) {
             if (!$product->slug) {
                 $product->slug = \Illuminate\Support\Str::slug($product->nama_produk) . '-' . $product->id;
                 $product->save();
             }
         }
-
-        // 7. Create Portfolios
-        $this->call(PortfolioSeeder::class);
     }
 }

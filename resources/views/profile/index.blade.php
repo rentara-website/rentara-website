@@ -68,10 +68,10 @@
                                         <td class="px-6 py-4">
                                             <div class="flex items-center gap-3">
                                                 <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden shrink-0">
-                                                    @if($order->product->image_product->isNotEmpty())
-                                                        <img src="{{ $order->product->image_product->first()->url }}" alt="{{ $order->product->nama_produk }}" class="w-full h-full object-cover">
+                                                    @if($order->product->image)
+                                                        <img src="{{ asset('storage/' . $order->product->image) }}" alt="{{ $order->product->nama_produk }}" class="w-full h-full object-cover">
                                                     @else
-                                                        <i data-lucide="camera" class="w-4 h-4 text-gray-400"></i>
+                                                        <img src="{{ asset('images/Rectangle24.png') }}" alt="{{ $order->product->nama_produk }}" class="w-full h-full object-cover">
                                                     @endif
                                                 </div>
                                                 <span class="font-bold text-gray-900">{{ $order->product->nama_produk }}</span>

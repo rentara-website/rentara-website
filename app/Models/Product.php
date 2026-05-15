@@ -22,13 +22,10 @@ class Product extends Model
         'slug',
         'harga',
         'deskripsi',
+        'image',
+        'link_portofolio',
         'category_id',
     ];
-
-    public function image_product()
-    {
-        return $this->hasMany(ImageProduct::class);
-    }
 
     public function category()
     {
@@ -38,11 +35,6 @@ class Product extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
-    }
-
-    public function portfolios()
-    {
-        return $this->hasMany(Portfolio::class);
     }
 
     public function getRouteKeyName()
