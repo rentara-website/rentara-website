@@ -15,6 +15,7 @@
         </a>
     </div>
 
+
     <form action="{{ route('admin.products.update', $product->slug) }}" method="POST" enctype="multipart/form-data" class="space-y-8">
         @csrf
         @method('PUT')

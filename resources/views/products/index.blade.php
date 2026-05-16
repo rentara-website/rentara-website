@@ -5,7 +5,8 @@
         {{-- Header Section --}}
         <div class="header z-10 relative mb-12">
             <div class="title-container mt-4 sm:mt-6 lg:mt-8">
-                <h1 class="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-[#0A4088]">Apa yang Kami
+                <h1 class="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-[#0A4088]">Apa yang
+                    Kami
                     Tawarkan?</h1>
                 <p
                     class="text-lg sm:text-xl md:text-2xl text-center max-w-4xl mx-auto mt-4 sm:mt-6 lg:mt-8 text-gray-600 leading-relaxed">
@@ -15,8 +16,8 @@
 
             <form id="search-form" action="{{ url('/products') }}" method="GET" class="mt-10 sm:mt-12 lg:mt-14">
                 <div class="relative max-w-2xl mx-auto group">
-                    <input type="text" name="search" id="search-input"
-                        placeholder="Cari gear, kamera, atau aksesoris..." value="{{ $search ?? '' }}"
+                    <input type="text" name="search" id="search-input" placeholder="Cari gear, kamera, atau aksesoris..."
+                        value="{{ $search ?? '' }}"
                         class="w-full pl-14 pr-12 py-4 rounded-2xl border-2 border-gray-100 focus:border-[#0A4088] focus:ring-0 shadow-lg transition-all duration-300 text-lg"
                         autocomplete="off">
                     <i data-lucide="search" class="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400"></i>

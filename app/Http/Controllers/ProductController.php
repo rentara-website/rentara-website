@@ -23,27 +23,29 @@ class ProductController extends Controller
         $query = Product::query()->with(['category', 'tags']);
 
         if ($search) {
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('nama_produk', 'like', '%' . $search . '%')
-                  ->orWhere('deskripsi', 'like', '%' . $search . '%');
+                    ->orWhere('deskripsi', 'like', '%' . $search . '%');
             });
         }
 
         if ($request->filled('category')) {
-            $query->whereHas('category', function($q) use ($categorySlug) {
+            $query->whereHas('category', function ($q) use ($categorySlug) {
                 $q->where('slug', $categorySlug);
             });
         }
 
         if ($request->filled('tag')) {
-            $query->whereHas('tags', function($q) use ($tagSlug) {
+            $query->whereHas('tags', function ($q) use ($tagSlug) {
                 $q->where('slug', $tagSlug);
             });
         }
 
         $perPage = $request->get('per_page', 20);
-        $products = $query->paginate($perPage);
-        
+        // $products = $query->paginate($perPage);
+
+        $products = $query->paginate($perPage)->withPath(route('products.index'));
+
         // Group paginated products by category
         $groupedProducts = $products->groupBy('category.name');
 
@@ -86,8 +88,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->load(['category', 'tags', 'portfolios']);
-        
+        $product->load(['category', 'tags']);
+
         $data = [
             "title" => $product->nama_produk,
             "product" => $product,

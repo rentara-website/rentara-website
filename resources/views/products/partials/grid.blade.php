@@ -12,7 +12,7 @@
     @foreach ($groupedProducts as $categoryName => $categoryProducts)
         <div class="mb-12">
             <div class="flex items-center justify-between mb-8">
-                <a href="{{ route('products', ['category' => $categoryProducts->first()->category->slug]) }}"
+                <a href="{{ route('products.index', ['category' => $categoryProducts->first()->category->slug]) }}"
                     class="text-2xl font-extrabold text-[#0A4088] flex items-center gap-3 group">
                     <span class="w-2 h-8 bg-[#0A4088] rounded-full"></span>
                     {{ $categoryName }}

@@ -35,7 +35,7 @@ Route::get("wa.me/628132849766", function () {
     return redirect("https://wa.me/628132849766");
 })->name('whatsapp.rent');
 
-Route::get("/products", [ProductController::class, 'index']);
+Route::get("/products", [ProductController::class, 'index'])->name('products.index');
 Route::get("/product/{product}", [ProductController::class, 'show'])->name('products.show');
 
 // Guest routes (no auth required)
@@ -85,7 +85,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Product Management
-    Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+    Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class);
 
     // Order Management
     Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
