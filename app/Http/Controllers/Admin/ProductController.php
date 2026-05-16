@@ -46,7 +46,8 @@ class ProductController extends Controller
 
             $imagePath = null;
             if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('images/products', 'public');
+                $publicId = $this->uploadToCloudinary($request->file('image'), 'rentara/products', 'image');
+                $imagePath = $publicId;
             }
 
             $product = Product::create([
@@ -110,10 +111,8 @@ class ProductController extends Controller
             ];
 
             if ($request->hasFile('image')) {
-                if ($product->image) {
-                    \Illuminate\Support\Facades\Storage::disk('public')->delete($product->image);
-                }
-                $data['image'] = $request->file('image')->store('images/products', 'public');
+                $publicId = $this->uploadToCloudinary($request->file('image'), 'rentara/products', 'image');
+                $data['image'] = $publicId;
             }
 
             $product->update($data);
