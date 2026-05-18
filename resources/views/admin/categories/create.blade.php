@@ -18,6 +18,10 @@
                         @enderror
                     </div>
                     <div>
+                        <label for="description" class="block text-xs font-bold text-gray-400 mb-2">Description</label>
+                        <textarea id="description" class="w-full px-4 py-2 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20" name="description" placeholder="Category Description">{{ old('description') }}</textarea>
+                    </div>
+                    <div>
                         <label class="block text-xs font-bold text-gray-400 mb-2">Slug</label>
                         <input type="text" class="w-full px-4 py-2 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 category-slug" name="slug" value="{{ old('slug') }}" placeholder="Category Slug" readonly>
                         @error('slug')

@@ -9,7 +9,8 @@
     @vite('resources/js/app.js')
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="icon" href="/images/Rentara-removebg-preview1.png" type="image/x-icon">
-
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 </head>
 <body class="bg-gray-50 font-poppins antialiased">
     <div class="flex h-screen overflow-hidden" x-data="{ sidebarOpen: false }">

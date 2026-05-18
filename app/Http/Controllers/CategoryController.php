@@ -37,10 +37,11 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'slug' => 'required|string|max:255|unique:categories,slug',
         ]);
 
-        $category = Category::create($request->only('name', 'slug'));
+        $category = Category::create($request->only('name', 'description', 'slug'));
 
         if ($category) {
             return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');

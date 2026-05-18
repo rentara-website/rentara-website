@@ -60,7 +60,7 @@
                             </h3>
 
                             <p class="text-gray-500 text-sm line-clamp-2 mb-4">
-                                {{ $product->deskripsi }}
+                                {!! $product->deskripsi !!}
                             </p>
 
                             <div class="flex flex-wrap gap-1.5">

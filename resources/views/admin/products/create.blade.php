@@ -87,8 +87,9 @@
 
             <div class="space-y-2">
                 <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Description</label>
-                <textarea name="deskripsi" required rows="5" placeholder="Describe the specifications and features..."
-                          class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">{{ old('deskripsi') }}</textarea>
+                <textarea id="editor" name="description">
+                    {{ old('description') }}
+                </textarea>
             </div>
         </div>
 
@@ -118,5 +119,5 @@
         </div>
     </form>
 </div>
-
+    
 @endsection

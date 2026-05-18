@@ -156,56 +156,6 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const ctx = document.getElementById('revenueChart').getContext('2d');
-        
-        const labels = {!! json_encode($monthly_revenue->pluck('month')) !!};
-        const data = {!! json_encode($monthly_revenue->pluck('revenue')) !!};
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels.length ? labels : ['No Data'],
-                datasets: [{
-                    label: 'Revenue',
-                    data: data.length ? data : [0],
-                    borderColor: '#0A4088',
-                    backgroundColor: 'rgba(10, 64, 136, 0.05)',
-                    fill: true,
-                    tension: 0.4,
-                    borderWidth: 4,
-                    pointBackgroundColor: '#fff',
-                    pointBorderColor: '#0A4088',
-                    pointBorderWidth: 2,
-                    pointRadius: 4,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: '#f3f4f6' },
-                        ticks: {
-                            font: { weight: 'bold' },
-                            callback: function(value) {
-                                return 'Rp ' + value.toLocaleString();
-                            }
-                        }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { font: { weight: 'bold' } }
-                    }
-                }
-            }
-        });
-    });
-</script>
 @endsection

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("nama_produk");
             $table->string("slug")->unique()->nullable();
             $table->string("harga");
-            $table->text("deskripsi");
+            $table->longText("deskripsi");
             $table->string("image")->nullable();
             $table->foreignId("category_id")->constrained()->onDelete("cascade");
             $table->timestamps();

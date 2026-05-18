@@ -70,7 +70,7 @@
                         <h3 class="text-lg font-bold text-gray-900 border-b-2 border-[#0A4088] w-fit pb-1">Tentang Produk
                         </h3>
                         <p class="text-gray-600 leading-relaxed text-lg">
-                            {{ $product->deskripsi }}
+                            {!! $product->deskripsi !!}
                         </p>
                     </div>
 

@@ -1,4 +1,5 @@
 import './bootstrap';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { createIcons, icons } from 'lucide';
 
@@ -50,4 +51,18 @@ const categorySlug = document.querySelector('.category-slug'); // Get the first 
 categoryName.addEventListener('keyup', function() {
     const slug = categoryName.value.toLowerCase().split(' ').join('-').replace(/[^\w-]+/g, '');
     categorySlug.value = slug;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const editor = document.querySelector('#editor');
+
+    if (editor) {
+        ClassicEditor
+            .create(editor)
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
 });
