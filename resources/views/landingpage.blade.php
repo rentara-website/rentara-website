@@ -2,7 +2,7 @@
 @extends('template')
 
 @section('content')
-<div class="hero-section-container mt-4 sm:mt-6 lg:mt-8 flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 md:px-8 lg:px-10 py-8 sm:py-10 lg:py-14">
+<div class="hero-section-container mt-4 sm:mt-24 lg:mt-8 flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 md:px-8 lg:px-10 py-8 sm:py-10 lg:py-14">
     <div class="hero-section-left w-full lg:w-1/2 flex flex-col justify-center">
         <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
             Platform Satu Hanya untuk Kamera, Gear Konten, dan Pembuat Konten di Bali
@@ -56,79 +56,31 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            <a href="/products?category=photographer" class="group block h-full">
-                <div class="relative flex flex-col h-full bg-[#0A4088] rounded-2xl p-5 sm:p-6 overflow-hidden transition-all duration-300 group-hover:bg-[#EDEFEF] group-hover:shadow-xl group-hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-xl bg-white/20 group-hover:bg-[#0A4088]/10 flex items-center justify-center mb-4 transition-colors duration-300">
-                        <i data-lucide="camera" class="w-5 h-5 text-white group-hover:text-[#0A4088] transition-colors duration-300"></i>
-                    </div>
+            @foreach($popularProducts as $product)
+                <a href="/products/?category={{ $product->slug }}" class="group block h-full">
+                    <div class="relative flex flex-col h-full bg-[#0A4088] rounded-2xl p-5 sm:p-6 overflow-hidden transition-all duration-300 group-hover:bg-[#EDEFEF] group-hover:shadow-xl group-hover:-translate-y-1">
+                        <div class="w-10 h-10 rounded-xl bg-white/20 group-hover:bg-[#0A4088]/10 flex items-center justify-center mb-4 transition-colors duration-300">
+                            <i data-lucide="camera" class="w-5 h-5 text-white group-hover:text-[#0A4088] transition-colors duration-300"></i>
+                        </div>
 
-                    <div class="flex-1">
-                        <h2 class="text-lg sm:text-xl font-bold text-white group-hover:text-black transition-colors duration-300">
-                            Fotografer
-                        </h2>
-                        <p class="text-white/80 group-hover:text-gray-600 text-sm mt-2 leading-relaxed transition-colors duration-300">
-                            Temukan fotografer profesional di Bali untuk menangkap momen Anda dan membuat konten berkualitas tinggi dengan mudah.
-                        </p>
-                    </div>
+                        <div class="flex-1">
+                            <h2 class="text-lg sm:text-xl font-bold text-white group-hover:text-black transition-colors duration-300">
+                                {{ $product->name }}
+                            </h2>
+                            <p class="text-white/80 group-hover:text-gray-600 text-sm mt-2 leading-relaxed transition-colors duration-300">
+                                {{ $product->description }}
+                            </p>
+                        </div>
 
-                    <div class="flex items-center gap-2 mt-4 text-white group-hover:text-[#0A4088] font-semibold text-sm transition-colors duration-300">
-                        Jelajahi Lebih Lanjut
-                        <span class="w-6 h-6 rounded-full bg-white/20 group-hover:bg-[#0A4088] group-hover:text-white flex items-center justify-center transition-all duration-300">
-                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </span>
+                        <div class="flex items-center gap-2 mt-4 text-white group-hover:text-[#0A4088] font-semibold text-sm transition-colors duration-300">
+                            Jelajahi Lebih Lanjut
+                            <span class="w-6 h-6 rounded-full bg-white/20 group-hover:bg-[#0A4088] group-hover:text-white flex items-center justify-center transition-all duration-300">
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </span>
+                        </div>
                     </div>
-                </div>
-            </a>
-
-            <a href="/products?category=videographer" class="group block h-full">
-                <div class="relative flex flex-col h-full bg-[#0A4088] rounded-2xl p-5 sm:p-6 overflow-hidden transition-all duration-300 group-hover:bg-[#EDEFEF] group-hover:shadow-xl group-hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-xl bg-white/20 group-hover:bg-[#0A4088]/10 flex items-center justify-center mb-4 transition-colors duration-300">
-                        <i data-lucide="video" class="w-5 h-5 text-white group-hover:text-[#0A4088] transition-colors duration-300"></i>
-                    </div>
-
-                    <div class="flex-1">
-                        <h2 class="text-lg sm:text-xl font-bold text-white group-hover:text-black transition-colors duration-300">
-                            Videografer
-                        </h2>
-                        <p class="text-white/80 group-hover:text-gray-600 text-sm mt-2 leading-relaxed transition-colors duration-300">
-                            Sewa videografer berpengalaman di Bali untuk membuat video sinematik yang membawa cerita Anda ke hidup.
-                        </p>
-                    </div>
-
-                    <div class="flex items-center gap-2 mt-4 text-white group-hover:text-[#0A4088] font-semibold text-sm transition-colors duration-300">
-                        Jelajahi Lebih Lanjut
-                        <span class="w-6 h-6 rounded-full bg-white/20 group-hover:bg-[#0A4088] group-hover:text-white flex items-center justify-center transition-all duration-300">
-                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="/products?category=content-equipment" class="group block h-full sm:col-span-2 lg:col-span-1">
-                <div class="relative flex flex-col h-full bg-[#0A4088] rounded-2xl p-5 sm:p-6 overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1 group-hover:bg-motorbike bg-cover bg-center">
-                    <div class="absolute inset-0 rounded-2xl bg-black/0 group-hover:bg-[#EDEFEF] transition-all duration-300"></div>
-
-                    <div class="relative z-10 w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-4 group-hover:bg-[#0A4088]/10">
-                        <i data-lucide="package" class="w-5 h-5 text-white group-hover:text-[#0A4088]"></i>
-                    </div>
-
-                    <div class="relative z-10 flex-1">
-                        <h2 class="text-lg sm:text-xl font-bold text-white group-hover:text-black">
-                            Equipment Konten
-                        </h2>
-                        <p class="text-white/80 group-hover:text-gray-600 text-sm mt-2 leading-relaxed">
-                            Sewa tripods, kit pencahayaan, dan aksesori dari mitra rental lokal terpercaya untuk kebutuhan produksi Anda.
-                        </p>
-                    </div>
-
-                    <div class="relative z-10 flex items-center gap-2 mt-4 text-white font-semibold text-sm group-hover:text-[#0A4088]">
-                        Jelajahi Lebih Lanjut
-                        <span class="text-white w-6 h-6 rounded-full bg-white/20 group-hover:bg-[#0A4088] flex items-center justify-center transition-all duration-300">
-                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </span>
-                    </div>
-                </div>
-            </a>
+                </a>
+            @endforeach
         </div>
     </div>
 </div>

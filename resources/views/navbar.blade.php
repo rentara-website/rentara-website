@@ -44,9 +44,8 @@
                         </button>
                     </form>
                 @else
-                    <a href="/login" class="bg-[#0A4088] text-white px-4 py-1.5 rounded-full hover:bg-[#08306b] transition text-xs font-bold shadow-md shadow-[#0A4088]/20">
-                        Masuk
-                    </a>
+                    {{-- Guest --}}
+                    <div></div>
                 @endauth
             </div>
         </div>

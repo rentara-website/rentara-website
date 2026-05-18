@@ -19,6 +19,7 @@ class CategoryFactory extends Factory
         $name = collect(['Camera', 'Lens', 'Lighting', 'Audio', 'Accessories'])->random() . ' ' . $this->faker->numberBetween(1, 100);
         return [
             'name' => $name,
+            'description' => $this->faker->paragraph(),
             'slug' => \Illuminate\Support\Str::slug($name)
         ];
     }

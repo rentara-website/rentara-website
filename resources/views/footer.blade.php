@@ -53,14 +53,14 @@
                 <ul class="flex flex-col gap-4">
                     <li class="flex items-center gap-3">
                         <div
-                            class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
                             <i data-lucide="map-pin" class="w-4 h-4 text-white"></i>
                         </div>
                         <span class="text-white/70 text-sm sm:text-base leading-relaxed">Bali, Indonesia</span>
                     </li>
                     <li class="flex items-center gap-3">
                         <div
-                            class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
                             <i data-lucide="phone" class="w-4 h-4 text-white"></i>
                         </div>
                         <a href="{{route('whatsapp.rent') . "?text=Hi Saya ingin bertanya mengenai Rentara."}}" target="_blank"

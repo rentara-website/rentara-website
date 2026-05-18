@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
-
+use App\Models\Category;
 
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
@@ -28,6 +28,7 @@ Route::get('/', function () {
     return view('landingpage', [
         "title" => "Home",
         "productLatest" => Product::latest()->take(3)->get(),
+        "popularProducts" => Category::inRandomOrder()->take(3)->get()
     ]);
 });
 
