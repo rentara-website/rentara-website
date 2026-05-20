@@ -143,8 +143,14 @@
 
     
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tiny.cloud/1/1hcotlqyxls3hk2b9zfy6vulnly5fu7ilx8lge8v7q09feio/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
     <script>
         lucide.createIcons();
+
+        tinymce.init({
+            selector: 'textarea#description',
+            height: 350
+        })
     </script>
     
     @stack('scripts')

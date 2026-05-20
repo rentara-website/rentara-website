@@ -86,10 +86,9 @@
             </div>
 
             <div class="space-y-2">
-                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Description</label>
-                <textarea id="editor" name="description">
-                    {{ old('description') }}
-                </textarea>
+                <label for="description" class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Description</label>
+                <textarea id="description" name="description" rows="4"
+                class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 focus:border-[#0A4088] transition">{{ old('description') }}</textarea>
             </div>
         </div>
 
