@@ -148,7 +148,7 @@
         lucide.createIcons();
 
         tinymce.init({
-            selector: 'textarea#description',
+            selector: 'textarea#deskripsi',
             height: 350
         })
     </script>
