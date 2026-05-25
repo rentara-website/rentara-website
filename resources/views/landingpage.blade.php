@@ -270,7 +270,7 @@
                         <div class="group relative bg-white rounded-3xl border border-gray-100 p-4 h-full flex flex-col transition-all duration-500 hover:shadow-[0_20px_50px_rgba(8,112,184,0.1)] hover:-translate-y-2">
                             <div class="relative overflow-hidden rounded-2xl aspect-4/3 mb-4 shrink-0">
                                 @if($product->image)
-                                    <img src="{{ Cloudinary::url($product->image) }}" alt="{{ $product->nama_produk }}"
+                                    <img src="{{ $product->resolveMediaUrl($product->image, ['width' => 600, 'height' => 450, 'crop' => 'fill', 'quality' => 'auto', 'fetch_format' => 'auto']) }}" alt="{{ $product->nama_produk }}"
                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                                 @else
                                     <img src="{{ asset('images/Rectangle24.png') }}" alt="{{ $product->nama_produk }}"

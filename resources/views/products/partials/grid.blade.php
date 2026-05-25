@@ -28,7 +28,7 @@
                     {{-- Image Container --}}
                     <div class="relative overflow-hidden rounded-2xl aspect-4/3 mb-5 shrink-0">
                         @if($product->image)
-                            <img src="{{ $product->image->first()->url }}" alt="{{ $product->nama_produk }}"
+                            <img src="{{ $product->resolveMediaUrl($product->image, ['width' => 600, 'height' => 450, 'crop' => 'fill', 'quality' => 'auto', 'fetch_format' => 'auto']) }}" alt="{{ $product->nama_produk }}"
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         @else
                             <img src="{{ asset('images/Rectangle24.png') }}" alt="{{ $product->nama_produk }}"

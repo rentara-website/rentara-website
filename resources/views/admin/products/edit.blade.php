@@ -79,7 +79,7 @@
                 <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Product Image (Optional)</label>
                 @if($product->image)
                     <div class="mb-4">
-                        <img src="{{ asset('storage/' . $product->image) }}" class="w-32 h-32 object-cover rounded-2xl border border-gray-200">
+                        <img src="{{ $product->resolveMediaUrl($product->image, ['width' => 256, 'height' => 256, 'crop' => 'fill']) }}" class="w-32 h-32 object-cover rounded-2xl border border-gray-200">
                     </div>
                 @endif
                 <input type="file" name="image" accept="image/*"

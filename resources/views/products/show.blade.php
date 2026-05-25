@@ -15,7 +15,7 @@
                     <div
                         class="relative bg-gray-50 rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl shadow-[#0A4088]/10 border border-gray-100">
                         @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->nama_produk }}"
+                            <img src="{{ $product->resolveMediaUrl($product->image, ['width' => 800, 'quality' => 'auto', 'fetch_format' => 'auto']) }}" alt="{{ $product->nama_produk }}"
                                 class="w-full h-auto max-h-125 object-contain transform group-hover:scale-105 transition-transform duration-700">
                         @else
                             <img src="{{ asset('images/Rectangle24.png') }}" alt="{{ $product->nama_produk }}"

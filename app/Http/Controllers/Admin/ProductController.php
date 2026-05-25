@@ -34,7 +34,7 @@ class ProductController extends Controller
         $request->validate([
             'nama_produk' => 'required|string|max:255',
             'harga' => 'required|numeric|min:0',
-            'deskripsi' => 'required|string',
+            'deskripsi' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
             'link_portofolio' => 'nullable|url|max:2048',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
@@ -55,7 +55,7 @@ class ProductController extends Controller
                 'nama_produk' => $request->nama_produk,
                 'slug' => \Illuminate\Support\Str::slug($request->nama_produk) . '-' . \Illuminate\Support\Str::random(5),
                 'harga' => $request->harga,
-                'deskripsi' => $request->deskripsi,
+                'deskripsi' => $request->deskripsi ?? '',
                 'link_portofolio' => $request->link_portofolio,
                 'image' => $imagePath,
                 'category_id' => $request->category_id,
@@ -68,7 +68,6 @@ class ProductController extends Controller
             \Illuminate\Support\Facades\DB::commit();
 
             return redirect()->route('admin.products.index')->with('success', 'Product created successfully!');
-
         } catch (\Exception $e) {
             \Illuminate\Support\Facades\DB::rollBack();
             \Illuminate\Support\Facades\Log::error('Product Creation Failed: ' . $e->getMessage());
@@ -92,7 +91,7 @@ class ProductController extends Controller
         $request->validate([
             'nama_produk' => 'required|string|max:255',
             'harga' => 'required|numeric|min:0',
-            'deskripsi' => 'required|string',
+            'deskripsi' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
             'link_portofolio' => 'nullable|url|max:2048',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
@@ -106,12 +105,15 @@ class ProductController extends Controller
             $data = [
                 'nama_produk' => $request->nama_produk,
                 'harga' => $request->harga,
-                'deskripsi' => $request->deskripsi,
+                'deskripsi' => $request->deskripsi ?? '',
                 'link_portofolio' => $request->link_portofolio,
                 'category_id' => $request->category_id,
             ];
 
             if ($request->hasFile('image')) {
+                if ($product->image) {
+                    $product->deleteMediaIfCloudinary($product->image, 'image');
+                }
                 $publicId = $this->uploadToCloudinary($request->file('image'), 'rentara/products', 'image');
                 $data['image'] = $publicId;
             }
@@ -124,7 +126,6 @@ class ProductController extends Controller
 
             \Illuminate\Support\Facades\DB::commit();
             return redirect()->route('admin.products.index')->with('success', 'Product updated successfully!');
-
         } catch (\Exception $e) {
             \Illuminate\Support\Facades\DB::rollBack();
             \Illuminate\Support\Facades\Log::error('Product Update Failed: ' . $e->getMessage());
@@ -134,7 +135,20 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        if ($product->image) {
+            $product->deleteMediaIfCloudinary($product->image, 'image');
+        }
         $product->delete();
         return back()->with('success', 'Product deleted successfully!');
+    }
+
+    protected function uploadToCloudinary($file, string $folder, string $resourceType): string
+    {
+        $response = Cloudinary::uploadApi()->upload($file->getRealPath(), [
+            'folder' => $folder,
+            'resource_type' => $resourceType,
+        ]);
+
+        return (string) $response['public_id'];
     }
 }
