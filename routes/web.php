@@ -11,6 +11,7 @@ use App\Models\Category;
 
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RatingController;
 
 // Authentication Routes
 use App\Http\Controllers\Auth\LoginController;
@@ -107,6 +108,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
 
     // Category Management
     Route::resource('/categories', CategoryController::class);
+
+    Route::resource('/ratings', RatingController::class);
 });
 
 Route::get('/test-mail', function () {

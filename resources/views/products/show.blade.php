@@ -114,6 +114,71 @@
             </div>
         </div>
 
+        <div class="form-ulasan-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <h2 class="text-3xl md:text-4xl font-black text-[#0A4088] mb-4 text-center">Berikan Ulasan Anda</h2>
+            <p class="text-gray-500 max-w-xl mx-auto mb-8 text-center">
+                Bagikan pengalaman Anda menggunakan produk kami untuk membantu pelanggan lain.
+            </p>
+
+            <form action="{{ route('admin.ratings.store') }}" method="POST">
+                @csrf
+
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                <!-- Nama -->
+                <div class="mb-4">
+                    <label class="block font-semibold mb-2">Nama</label>
+
+                    <input
+                        type="text"
+                        name="nama"
+                        class="w-full border rounded-lg p-3"
+                        required
+                    >
+                </div>
+                <div class="mb-4">
+                    <label class="block font-semibold mb-2">Email</label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="w-full border rounded-lg p-3"
+                        required
+                    >
+                </div>
+
+                <!-- Rating -->
+                <div class="mb-6">
+                    <label class="block font-semibold mb-2">Rating</label>
+                    <div class="rating rating-lg">
+                        <input type="radio" name="rating" value="1" class="mask mask-star bg-yellow-400" />
+                        <input type="radio" name="rating" value="2" class="mask mask-star bg-yellow-400" />
+                        <input type="radio" name="rating" value="3" class="mask mask-star bg-yellow-400" />
+                        <input type="radio" name="rating" value="4" class="mask mask-star bg-yellow-400" />
+                        <input type="radio" name="rating" value="5" class="mask mask-star bg-yellow-400" />
+                    </div>
+                </div>
+
+                <!-- Komentar -->
+                <div class="mb-4">
+                    <label class="block font-semibold mb-2">Komentar</label>
+
+                    <textarea
+                        name="komentar"
+                        rows="4"
+                        class="w-full border rounded-lg p-3"
+                    ></textarea>
+                </div>
+
+                <button
+                    type="submit"
+                    class="bg-[#0A4088] text-white px-6 py-3 rounded-lg hover:bg-[#08306b] transition-colors font-bold hover:cursor-pointer"
+                >
+                    Kirim Rating
+                </button>
+            </form>
+        </div>
+
         {{-- Breadcrumbs / Back Navigation --}}
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <a href="{{ url('/products') }}"
