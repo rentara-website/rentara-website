@@ -69,7 +69,7 @@
                                             <div class="flex items-center gap-3">
                                                 <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden shrink-0">
                                                     @if($order->product->image)
-                                                        <img src="{{ asset('storage/' . $order->product->image) }}" alt="{{ $order->product->nama_produk }}" class="w-full h-full object-cover">
+                                                        <img src="{{ $order->product->resolveMediaUrl($order->product->image, ['width' => 96, 'height' => 96, 'crop' => 'fill']) }}" alt="{{ $order->product->nama_produk }}" class="w-full h-full object-cover">
                                                     @else
                                                         <img src="{{ asset('images/Rectangle24.png') }}" alt="{{ $order->product->nama_produk }}" class="w-full h-full object-cover">
                                                     @endif

@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ImageProduct;
 use App\Models\Category;
+use App\Concerns\HasCloudinaryMedia;
 
 class Product extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductFactory> */
-    use HasFactory;
+    use HasFactory, HasCloudinaryMedia;
 
     /**
      * The attributes that are mass assignable.
