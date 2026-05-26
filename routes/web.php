@@ -54,6 +54,8 @@ Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name(
 // Public routes (no auth required)
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
+Route::post('/ratings/store', [RatingController::class, 'store'])->name("ratings.store");
+
 
 Route::middleware('auth')->group(function () {
 
@@ -109,7 +111,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
     // Category Management
     Route::resource('/categories', CategoryController::class);
 
-    Route::resource('/ratings', RatingController::class);
+    Route::resource('/ratings', RatingController::class)->name('ratings', 'admin.ratings');
 });
 
 Route::get('/test-mail', function () {

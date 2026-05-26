@@ -89,7 +89,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->load(['category', 'tags']);
+        $product->load(['category', 'tags', 'orders', 'ratings']);
 
         $data = [
             "title" => $product->nama_produk,

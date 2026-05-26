@@ -120,7 +120,7 @@
                 Bagikan pengalaman Anda menggunakan produk kami untuk membantu pelanggan lain.
             </p>
 
-            <form action="{{ route('admin.ratings.store') }}" method="POST">
+            <form action="{{ route('ratings.store') }}" method="POST">
                 @csrf
 
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -135,6 +135,9 @@
                         class="w-full border rounded-lg p-3"
                         required
                     >
+                    @error('nama')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="mb-4">
                     <label class="block font-semibold mb-2">Email</label>
@@ -145,18 +148,26 @@
                         class="w-full border rounded-lg p-3"
                         required
                     >
+                    @error('email')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Rating -->
                 <div class="mb-6">
                     <label class="block font-semibold mb-2">Rating</label>
-                    <div class="rating rating-lg">
-                        <input type="radio" name="rating" value="1" class="mask mask-star bg-yellow-400" />
-                        <input type="radio" name="rating" value="2" class="mask mask-star bg-yellow-400" />
-                        <input type="radio" name="rating" value="3" class="mask mask-star bg-yellow-400" />
-                        <input type="radio" name="rating" value="4" class="mask mask-star bg-yellow-400" />
-                        <input type="radio" name="rating" value="5" class="mask mask-star bg-yellow-400" />
+
+                    <div class="flex flex-row-reverse justify-end gap-1">
+                        @for ($i = 5; $i >= 1; $i--)
+                            <input type="radio" id="rating-{{ $i }}" name="rating" value="{{ $i }}" class="peer hidden" required>
+                            <label for="rating-{{ $i }}" class="cursor-pointer text-3xl text-gray-300 peer-checked:text-yellow-400 hover:text-yellow-400 transition">
+                                <i data-lucide="star" class="w-8 h-8 fill-current"></i>
+                            </label>
+                        @endfor
                     </div>
+                    @error('rating')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Komentar -->
@@ -168,6 +179,9 @@
                         rows="4"
                         class="w-full border rounded-lg p-3"
                     ></textarea>
+                    @error('komentar')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <button
@@ -177,7 +191,33 @@
                     Kirim Rating
                 </button>
             </form>
+            
+            <div class="mt-8 space-y-4">
+                <h3 class="text-xl font-bold text-gray-900">Ulasan Pengguna</h3>
+    
+                @forelse($product->ratings as $rating)
+                    <div class="p-4 border rounded-2xl bg-white">
+                        <div class="flex items-center justify-between mb-2">
+                            <div>
+                                <p class="font-bold text-gray-900">{{ $rating->nama }}</p>
+                                <p class="text-sm text-gray-500">{{ $rating->email }}</p>
+                            </div>
+    
+                            <div class="flex items-center gap-1 text-yellow-400">
+                                @for($i = 1; $i <= 5; $i++)
+                                    <span class="{{ $i <= $rating->rating ? 'text-yellow-400' : 'text-gray-300' }}">★</span>
+                                @endfor
+                            </div>
+                        </div>
+    
+                        <p class="text-gray-600">{{ $rating->komentar }}</p>
+                    </div>
+                @empty
+                    <p class="text-gray-500">Belum ada ulasan untuk produk ini.</p>
+                @endforelse
+            </div>
         </div>
+
 
         {{-- Breadcrumbs / Back Navigation --}}
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

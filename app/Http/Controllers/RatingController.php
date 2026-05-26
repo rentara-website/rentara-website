@@ -13,7 +13,12 @@ class RatingController extends Controller
      */
     public function index()
     {
-        //
+        $ratings = Rating::with('product')->latest()->paginate(20);
+
+        return view('admin.ratings.index', [
+            'ratings' => $ratings,
+            'title' => 'Ratings Management'
+        ]);
     }
 
     /**
@@ -29,11 +34,11 @@ class RatingController extends Controller
      */
     public function store(StoreRatingRequest $request)
     {
-        // $validated = $request->validated();
+        $validatedData = $request->validated();
 
-        // Rating::create($validated);
+        Rating::create($validatedData);
 
-        // return redirect()->back()->with('success', 'Rating berhasil ditambahkan.');
+        return redirect()->back()->with('success', 'Rating berhasil ditambahkan.');
     }
 
     /**
@@ -49,7 +54,11 @@ class RatingController extends Controller
      */
     public function edit(Rating $rating)
     {
-        //
+        return view('admin.ratings.edit', [
+            'rating' => $rating,
+            'title' => 'Edit Rating',
+            'products' => \App\Models\Product::all()
+        ]);
     }
 
     /**
@@ -57,7 +66,11 @@ class RatingController extends Controller
      */
     public function update(UpdateRatingRequest $request, Rating $rating)
     {
-        //
+        $validatedData = $request->validated();
+
+        $rating->update($validatedData);
+
+        return redirect()->route('admin.ratings.index')->with('success', 'Rating berhasil diperbarui.');
     }
 
     /**
@@ -65,6 +78,8 @@ class RatingController extends Controller
      */
     public function destroy(Rating $rating)
     {
-        //
+        $rating->delete();
+
+        return redirect()->route('admin.ratings.index')->with('success', 'Rating berhasil dihapus.');
     }
 }

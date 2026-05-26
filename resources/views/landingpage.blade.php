@@ -299,7 +299,7 @@
                                     </h3>
 
                                     <p class="text-gray-500 text-sm line-clamp-2 mb-3">
-                                        {{ \Illuminate\Support\Str::limit($product->deskripsi, 120, '...') }}
+                                        {!! \Illuminate\Support\Str::limit($product->deskripsi, 120, '...') !!}
                                     </p>
 
                                     <div class="flex flex-wrap gap-1.5">

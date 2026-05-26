@@ -96,8 +96,8 @@
 
         <div class="flex items-center gap-4">
             <a href="{{ route('admin.products.index') }}" class="px-8 py-4 bg-white border border-gray-100 text-gray-400 font-bold rounded-2xl hover:bg-gray-50 transition">Cancel</a>
-            <button type="submit" class="flex-1 bg-[#0A4088] hover:bg-[#08306b] text-white font-bold py-4 rounded-2xl transition shadow-xl shadow-[#0A4088]/30">
-                Update Product Listing
+            <button type="submit" class="js-submit-btn flex-1 bg-[#0A4088] hover:bg-[#08306b] text-white font-bold py-4 rounded-2xl transition shadow-xl shadow-[#0A4088]/30">
+                <span class="js-btn-text">Update Product Listing</span>
             </button>
         </div>
     </form>

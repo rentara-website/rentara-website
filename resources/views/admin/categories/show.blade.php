@@ -19,6 +19,13 @@
                         @enderror
                     </div>
                     <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-2">Description</label>
+                        <input type="text" class="w-full px-4 py-2 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 category-description" name="description" value="{{ $category->description }}">
+                        @error('description')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
                         <label class="block text-xs font-bold text-gray-400 mb-2">Slug</label>
                         <input type="text" class="w-full px-4 py-2 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 category-slug" name="slug" value="{{ $category->slug }}" readonly>
                         @error('slug')

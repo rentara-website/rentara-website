@@ -112,8 +112,8 @@
 
         <div class="flex flex-col sm:flex-row items-center gap-4">
             <button type="reset" class="w-full sm:w-auto px-8 py-4 bg-white border border-gray-100 text-gray-400 font-bold rounded-2xl hover:bg-gray-50 transition">Reset Form</button>
-            <button type="submit" class="w-full sm:flex-1 bg-[#0A4088] hover:bg-[#08306b] text-white font-bold py-4 rounded-2xl transition shadow-xl shadow-[#0A4088]/30">
-                Publish Product Listing
+            <button type="submit" class="js-submit-btn w-full sm:flex-1 bg-[#0A4088] hover:bg-[#08306b] text-white font-bold py-4 rounded-2xl transition shadow-xl shadow-[#0A4088]/30">
+                <span class="js-btn-text">Publish Product Listing</span>
             </button>
         </div>
     </form>

@@ -12,7 +12,7 @@ class UpdateRatingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,11 @@ class UpdateRatingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "product_id" => "required|exists:products,id",
+            "email" => "required|email|max:255",
+            "rating" => "required|integer|min:1|max:5",
+            "nama" => "required|string|max:255",
+            "komentar" => "nullable|string|max:1000"
         ];
     }
 }

@@ -81,11 +81,12 @@
                                     <a href="{{ route('admin.products.edit', $product->slug) }}" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
                                         <i data-lucide="edit-3" class="w-4 h-4"></i>
                                     </a>
-                                    <form action="{{ route('admin.products.destroy', $product->slug) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?')">
+                                    <form action="{{ route('admin.products.destroy', $product->slug) }}" method="POST" class="js-delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition" title="Delete">
-                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                        <button type="submit"
+                                            class="js-delete-btn px-4 py-2 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 font-semibold transition">
+                                            Delete
                                         </button>
                                     </form>
                                 </div>
