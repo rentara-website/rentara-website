@@ -151,4 +151,26 @@ class ProductController extends Controller
 
         return (string) $response['public_id'];
     }
+
+    public function search(Request $request)
+    {
+        $q = $request->get('q');
+
+        $products = Product::query()
+            ->with(['category', 'tags'])
+            ->when($q, function ($query) use ($q) {
+                $query->where('nama_produk', 'like', "%{$q}%")
+                    ->orWhere('slug', 'like', "%{$q}%")
+                    ->orWhereHas('category', function ($cat) use ($q) {
+                        $cat->where('name', 'like', "%{$q}%");
+                    })
+                    ->orWhereHas('tags', function ($tag) use ($q) {
+                        $tag->where('name', 'like', "%{$q}%");
+                    });
+            })
+            ->latest()
+            ->paginate(10);
+
+        return view('admin.products.partials.rows', compact('products'));
+    }
 }

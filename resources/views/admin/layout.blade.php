@@ -79,7 +79,7 @@
 
 
                 <div class="mt-auto pt-10">
-                    <a href="/admin/dashboard" class="flex w-full items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:bg-red-500/10 hover:text-red-200 transition">
+                    <a href="/" class="flex w-full items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:bg-red-500/10 hover:text-red-200 transition">
                         <i data-lucide="home" class="w-5 h-5"></i>
                         <span>Back to Site</span>
                     </a>
@@ -152,6 +152,7 @@
             height: 350
         })
 
+        //disable button when uploading edit and deleting products
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.querySelector('form[action*="admin/products"]');
             const submitBtns = document.querySelectorAll('.js-submit-btn');
@@ -184,6 +185,199 @@
                     btn.innerHTML = 'Deleting...';
                     btn.classList.add('opacity-70', 'cursor-not-allowed');
                 });
+            });
+        });
+
+        //search users
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('user-search');
+            const tbody = document.getElementById('users-table-body');
+            let timer = null;
+
+            async function searchUsers(q) {
+                const url = new URL("{{ route('admin.users.search') }}", window.location.origin);
+                url.searchParams.set('q', q);
+
+                const response = await fetch(url.toString(), {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                const html = await response.text();
+                tbody.innerHTML = html;
+
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+            }
+
+            input.addEventListener('input', function () {
+                clearTimeout(timer);
+
+                timer = setTimeout(() => {
+                    searchUsers(input.value.trim());
+                }, 300);
+            });
+        });
+
+        //search categories
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('category-search');
+            const tbody = document.getElementById('categories-table-body');
+            let timer = null;
+
+            async function searchCategories(q) {
+                const url = new URL("{{ route('admin.categories.search') }}", window.location.origin);
+                url.searchParams.set('q', q);
+
+                const response = await fetch(url.toString(), {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                const html = await response.text();
+                tbody.innerHTML = html;
+
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+            }
+
+            input.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    searchCategories(input.value.trim());
+                }, 300);
+            });
+        });
+
+        //search products
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('product-search');
+            const tbody = document.getElementById('products-table-body');
+            let timer = null;
+
+            async function searchProducts(q) {
+                const url = new URL("{{ route('admin.products.search') }}", window.location.origin);
+                url.searchParams.set('q', q);
+
+                const response = await fetch(url.toString(), {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                const html = await response.text();
+                tbody.innerHTML = html;
+
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+            }
+
+            input.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    searchProducts(input.value.trim());
+                }, 300);
+            });
+        });
+
+        //search rating
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('rating-search');
+            const tbody = document.getElementById('ratings-table-body');
+            let timer = null;
+
+            async function searchRatings(q) {
+                const url = new URL("{{ route('admin.ratings.search') }}", window.location.origin);
+                url.searchParams.set('q', q);
+
+                const response = await fetch(url.toString(), {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                const html = await response.text();
+                tbody.innerHTML = html;
+
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+            }
+
+            input.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    searchRatings(input.value.trim());
+                }, 300);
+            });
+        });
+
+        //search tags
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('tag-search');
+            const tbody = document.getElementById('tags-table-body');
+            let timer = null;
+
+            async function searchTags(q) {
+                const url = new URL("{{ route('admin.tags.search') }}", window.location.origin);
+                url.searchParams.set('q', q);
+
+                const response = await fetch(url.toString(), {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                const html = await response.text();
+                tbody.innerHTML = html;
+
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+            }
+
+            input.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    searchTags(input.value.trim());
+                }, 300);
+            });
+        });
+
+        //search order
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('order-search');
+            const tbody = document.getElementById('orders-table-body');
+            let timer = null;
+
+            async function searchOrders(q) {
+                const url = new URL("{{ route('admin.orders.search') }}", window.location.origin);
+                url.searchParams.set('q', q);
+
+                const response = await fetch(url.toString(), {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                const html = await response.text();
+                tbody.innerHTML = html;
+
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+            }
+
+            input.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    searchOrders(input.value.trim());
+                }, 300);
             });
         });
     </script>

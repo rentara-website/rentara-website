@@ -42,6 +42,22 @@ class UserController extends Controller
         return back()->with('success', 'User role updated to ' . $user->role);
     }
 
+    public function search(Request $request)
+    {
+        $q = $request->get('q');
+
+        $users = User::query()
+            ->when($q, function ($query) use ($q) {
+                $query->where('name', 'like', "%{$q}%")
+                    ->orWhere('email', 'like', "%{$q}%")
+                    ->orWhere('role', 'like', "%{$q}%");
+            })
+            ->latest()
+            ->paginate(10);
+
+        return view('admin.users.partials.rows', compact('users'));
+    }
+
     public function destroy(User $user)
     {
         // Removed auth check for public access

@@ -90,6 +90,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
 
     // Product Management
     Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class);
+    Route::get('/admin/products/search', [\App\Http\Controllers\Admin\ProductController::class, 'search'])->name('products.search');
 
     // Order Management
     Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
@@ -99,19 +100,26 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
     Route::put('/orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('orders.update');
     Route::patch('/orders/{order}/status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.updateStatus');
     Route::delete('/orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'destroy'])->name('orders.destroy');
+    Route::get('/admin/orders/search', [\App\Http\Controllers\Admin\OrderController::class, 'search'])->name('orders.search');
 
     // User Management
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get("/admin/users/search", [UserController::class, 'search'])->name('users.search');
     Route::patch('/users/{user}/role', [UserController::class, 'toggleRole'])->name('users.toggleRole');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
     // Tag Management
     Route::resource('/tags', TagController::class);
+    Route::get('/admin/tags/search', [TagController::class, 'search'])->name('tags.search');
 
     // Category Management
     Route::resource('/categories', CategoryController::class);
 
+    Route::get('/admin/categories/search', [CategoryController::class, 'search'])->name('categories.search');
+
     Route::resource('/ratings', RatingController::class)->name('ratings', 'admin.ratings');
+    Route::get('/admin/ratings/search', [RatingController::class, 'search'])->name('ratings.search');
+    
 });
 
 Route::get('/test-mail', function () {

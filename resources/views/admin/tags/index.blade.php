@@ -19,7 +19,27 @@
         <div class="mt-2 bg-green-400 px-2 py-2 rounded-lg w-full">
             <p class="text-white">{{ session('success') }}</p>
         </div>
+    @elseif(session('error'))
+        <div class="mt-2 bg-red-400 px-2 py-2 rounded-lg w-full">
+            <p class="text-red-700">{{ session('error') }}</p>
+        </div>
     @endif
+
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div class="relative w-full md:max-w-md">
+            <i data-lucide="search" class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+            <input
+                type="text"
+                id="tag-search"
+                placeholder="Cari tag..."
+                class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0A4088]/20 bg-white"
+            >
+        </div>
+
+        <div class="shrink-0 px-4 py-3 bg-blue-50 rounded-2xl text-[10px] font-bold text-[#0A4088] uppercase tracking-widest border border-blue-100">
+            Total Tags: {{ $tags->count() }}
+        </div>
+    </div>
 
     <!-- Tags Table -->
     <div class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
@@ -33,38 +53,8 @@
                         <th class="px-8 py-5 text-right">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-50 uppercase text-xs font-bold">
-                    @forelse($tags as $tag)
-                        <tr class="hover:bg-gray-50/50 transition group">
-                            <td class="px-8 py-5 text-gray-900">
-                                <span class="bg-gray-100 px-3 py-1 rounded-full text-[#0A4088] group-hover:bg-[#0A4088] group-hover:text-white transition-colors">
-                                    {{ $tag->name }}
-                                </span>
-                            </td>
-                            <td class="px-8 py-5 text-gray-400 font-medium lowercase">?tag={{ $tag->slug }}</td>
-                            <td class="px-8 py-5 text-gray-600">
-                                {{ $tag->products()->count() }} Products
-                            </td>
-                            <td class="px-8 py-5 text-right">
-                                <div class="flex items-center justify-end gap-2">
-                                    <a href="{{ route('admin.tags.edit', $tag->id) }}" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
-                                        <i data-lucide="edit-3" class="w-4 h-4"></i>
-                                    </a>
-                                    <form action="{{ route('admin.tags.destroy', $tag->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this tag?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition" title="Delete">
-                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="px-8 py-10 text-center text-gray-400 italic">No tags found. Add your first tag above.</td>
-                        </tr>
-                    @endforelse
+                <tbody id="tags-table-body" class="divide-y divide-gray-50 uppercase text-xs font-bold">
+                    @include('admin.tags.partials.rows', ['tags' => $tags])
                 </tbody>
             </table>
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -94,5 +95,28 @@ class OrderController extends Controller
     {
         $order->delete();
         return back()->with('success', 'Order record removed.');
+    }
+
+    public function search(Request $request)
+    {
+        $q = $request->get('q');
+
+        $orders = Order::with(['user', 'product'])
+            ->when($q, function ($query) use ($q) {
+                $query->where('id', 'like', "%{$q}%")
+                    ->orWhere('status', 'like', "%{$q}%")
+                    ->orWhereHas('user', function ($user) use ($q) {
+                        $user->where('name', 'like', "%{$q}%")
+                            ->orWhere('email', 'like', "%{$q}%");
+                    })
+                    ->orWhereHas('product', function ($product) use ($q) {
+                        $product->where('nama_produk', 'like', "%{$q}%");
+                    });
+            })
+            ->latest()
+            ->paginate(10);
+
+
+        return view('admin.orders.partials.rows', compact('orders'));
     }
 }

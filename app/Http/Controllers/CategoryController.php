@@ -105,4 +105,19 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
     }
+
+    public function search(Request $request)
+    {
+        $q = $request->get('q');
+
+        $categories = Category::query()
+            ->when($q, function ($query) use ($q) {
+                $query->where('name', 'like', "%{$q}%")
+                    ->orWhere('slug', 'like', "%{$q}%");
+            })
+            ->latest()
+            ->get();
+
+        return view('admin.categories.partials.rows', compact('categories'));
+    }
 }

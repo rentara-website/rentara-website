@@ -83,4 +83,19 @@ class TagController extends Controller
 
         return redirect()->route('admin.tags.index')->with('success', 'Tag deleted successfully.');
     }
+
+    public function search(Request $request)
+    {
+        $q = $request->get('q');
+
+        $tags = Tag::query()
+            ->when($q, function ($query) use ($q) {
+                $query->where('name', 'like', "%{$q}%")
+                    ->orWhere('slug', 'like', "%{$q}%");
+            })
+            ->latest()
+            ->get();
+
+        return view('admin.tags.partials.rows', compact('tags'));
+    }
 }

@@ -82,4 +82,20 @@ class RatingController extends Controller
 
         return redirect()->route('admin.ratings.index')->with('success', 'Rating berhasil dihapus.');
     }
+
+    public function search(Request $request)
+    {
+        $q = $request->get('q');
+
+        $ratings = Rating::query()
+            ->when($q, function ($query) use ($q) {
+                $query->where('nama', 'like', "%{$q}%")
+                    ->orWhere('email', 'like', "%{$q}%")
+                    ->orWhere('komentar', 'like', "%{$q}%");
+            })
+            ->latest()
+            ->paginate(10);
+
+        return view('admin.ratings.partials.rows', compact('ratings'));
+    }
 }
