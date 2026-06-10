@@ -57,12 +57,28 @@
                             </div>
                         </div>
 
-                        <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa ' . $product->nama_produk) }}"
-                            target="_blank"
-                            class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95">
-                            <i data-lucide="message-circle" class="w-6 h-6"></i>
-                            Sewa Sekarang
-                        </a>
+                        @if($product->category->slug == "jasa-fotografi-videografi")
+                            <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa jasa dari ' . $product->nama_produk . '. Tolong berikan saya detail jasa ini?') }}"
+                                target="_blank"
+                                class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95">
+                                <i data-lucide="message-circle" class="w-6 h-6"></i>
+                                Sewa Sekarang
+                            </a>
+                        @elseif($product->category->slug == "paket-kamera-jasa-fotografi-videografi")
+                            <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa paket ' . $product->nama_produk . '. Mohon informasikan detail paket, ketersediaan, dan harga sewa.') }}"
+                                target="_blank"
+                                class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95">
+                                <i data-lucide="message-circle" class="w-6 h-6"></i>
+                                Pesan Paket Sekarang
+                            </a>
+                        @else
+                            <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa ' . $product->nama_produk . '. Tolong berikan saya detail produk ini?') }}"
+                                target="_blank"
+                                class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95">
+                                <i data-lucide="message-circle" class="w-6 h-6"></i>
+                                Sewa Sekarang
+                            </a>
+                        @endif
                     </div>
 
                     {{-- Description --}}
@@ -98,19 +114,22 @@
                     Lihat hasil karya otentik yang dihasilkan oleh tim profesional kami.
                 </p>
 
-                @if($product->link_portofolio)
-                    <a href="{{ $product->link_portofolio }}" target="_blank"
-                        class="inline-flex items-center justify-center gap-3 bg-[#0A4088] hover:bg-[#08306b] text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-[#0A4088]/20 transition-all transform hover:-translate-y-1 active:scale-95">
-                        <i data-lucide="external-link" class="w-6 h-6"></i>
-                        Buka Link Portofolio
-                    </a>
-                @else
-                    <div class="py-12 bg-white rounded-3xl border border-dashed border-gray-200">
-                        <i data-lucide="link-2-off" class="w-16 h-16 text-gray-300 mx-auto mb-4"></i>
-                        <h2 class="text-xl font-bold text-gray-700">Belum ada portofolio</h2>
-                    </div>
-                @endif
+                @if($product->category->name == 'Fotografer' || $product->category->name == 'Videografer')
 
+                    @if($product->link_portofolio)
+                        <a href="{{ $product->link_portofolio }}" target="_blank"
+                            class="inline-flex items-center justify-center gap-3 bg-[#0A4088] hover:bg-[#08306b] text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-[#0A4088]/20 transition-all transform hover:-translate-y-1 active:scale-95">
+                            <i data-lucide="external-link" class="w-6 h-6"></i>
+                            Buka Link Portofolio
+                        </a>
+                    @else
+                        <div class="py-12 bg-white rounded-3xl border border-dashed border-gray-200">
+                            <i data-lucide="link-2-off" class="w-16 h-16 text-gray-300 mx-auto mb-4"></i>
+                            <h2 class="text-xl font-bold text-gray-700">Belum ada portofolio</h2>
+                        </div>
+                    @endif
+
+                @endif
             </div>
         </div>
 
