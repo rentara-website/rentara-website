@@ -24,6 +24,34 @@
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
         });
+
+        const navbar = document.getElementById('navbar');
+
+        function refreshIcons() {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        function handleNavbar() {
+            if (window.scrollY > 20) {
+                navbar.classList.add('fixed', 'top-0', 'left-0', 'shadow-md', 'border-b', 'border-gray-100');
+                navbar.classList.remove('relative');
+                document.body.classList.add('pt-[88px]');
+            } else {
+                navbar.classList.remove('fixed', 'top-0', 'left-0', 'shadow-md', 'border-b', 'border-gray-100');
+                navbar.classList.add('relative');
+                document.body.classList.remove('pt-[88px]');
+            }
+
+            refreshIcons();
+        }
+
+        window.addEventListener('scroll', handleNavbar);
+        window.addEventListener('load', function () {
+            handleNavbar();
+            refreshIcons();
+        });
     </script>
 </body>
 </html>

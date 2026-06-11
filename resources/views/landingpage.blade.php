@@ -2,7 +2,7 @@
 @extends('template')
 
 @section('content')
-<div class="hero-section-container mt-4 sm:mt-24 lg:mt-8 flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 md:px-8 lg:px-10 py-8 sm:py-10 lg:py-14">
+<div class="hero-section-container mt-4 sm:mt-24 lg:mt-28 flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 md:px-8 lg:px-10 py-8 sm:py-10 lg:py-14">
     <div class="hero-section-left w-full lg:w-1/2 flex flex-col justify-center">
         <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
             Platform Satu Hanya untuk Kamera, Gear Konten, dan Pembuat Konten di Bali
