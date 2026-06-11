@@ -10,111 +10,106 @@
     </div>
 @else
     @foreach ($groupedProducts as $categoryName => $categoryProducts)
-    <div class="mb-12">
-        <div class="flex items-center justify-between mb-8">
-            <a href="{{ route('products.index', ['category' => $categoryProducts->first()->category->slug]) }}"
-               class="text-2xl font-extrabold text-[#0A4088] flex items-center gap-3 group">
-                <span class="w-2 h-8 bg-[#0A4088] rounded-full"></span>
-                {{ $categoryName }}
-                <span class="text-sm font-normal text-gray-400 transition-transform duration-300 group-hover:translate-x-1">
-                    ({{ count($categoryProducts) }} items)
-                </span>
-            </a>
-        </div>
+        <div class="mb-16 sm:mb-20">
+            <div class="flex items-center justify-between mb-6 sm:mb-8">
+                <a href="{{ route('products.index', ['category' => $categoryProducts->first()->category->slug]) }}"
+                   class="text-xl sm:text-2xl font-extrabold text-[#0A4088] flex items-center gap-3 group">
+                    <span class="w-2 h-7 sm:h-8 bg-[#0A4088] rounded-full"></span>
+                    {{ $categoryName }}
+                    <span class="text-xs sm:text-sm font-normal text-gray-400 transition-transform duration-300 group-hover:translate-x-1">
+                        ({{ count($categoryProducts) }} items)
+                    </span>
+                </a>
+            </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
-            @foreach ($categoryProducts as $product)
-                <div class="group relative bg-white rounded-3xl border border-gray-100 p-4 h-full flex flex-col transition-all duration-500 hover:shadow-[0_20px_50px_rgba(8,112,184,0.1)] hover:-translate-y-2">
-                    {{-- Image Container --}}
-                    <div class="relative overflow-hidden rounded-2xl aspect-4/3 mb-5 shrink-0">
-                        @if($product->image)
-                            <img src="{{ $product->resolveMediaUrl($product->image, ['width' => 600, 'height' => 450, 'crop' => 'fill', 'quality' => 'auto', 'fetch_format' => 'auto']) }}" alt="{{ $product->nama_produk }}"
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        @else
-                            <img src="{{ asset('images/Rectangle24.png') }}" alt="{{ $product->nama_produk }}"
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        @endif
-
-                        {{-- Category Badge --}}
-                        <div class="absolute top-4 left-4">
-                            <span class="bg-white/90 backdrop-blur-sm text-[#0A4088] text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-sm">
-                                {{ $product->category->name }}
-                            </span>
-                        </div>
-
-                        {{-- Hover Quick Action --}}
-
-                        
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            @if($product->category->slug === "jasa-fotografi-videografi")
-                                <a href="{{ route('whatsapp.rent') }}?text=Halooo Saya tertarik {{ $product->nama_produk }} dari websitemu. Tolong berikan saya detail barangnya?"
-                                target="_blank"
-                                class="bg-white text-[#0A4088] px-6 py-2.5 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                    Sewa Sekarang
-                                </a>
-                            @elseif($product->category->slug === "paket-kamera-jasa-fotografi-videografi")
-                                <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa paket ' . $product->nama_produk . '. Mohon informasikan detail paket, ketersediaan, dan harga sewa.') }}"
-                                target="_blank"
-                                class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95">
-                                    <i data-lucide="message-circle" class="w-6 h-6"></i>
-                                    Pesan Paket Sekarang
-                                </a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6 items-start">
+                @foreach ($categoryProducts as $product)
+                    <div class="group relative bg-white rounded-3xl border border-gray-100 p-4 flex flex-col transition-all duration-500 hover:shadow-[0_20px_50px_rgba(8,112,184,0.1)] hover:-translate-y-2">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-4 shrink-0">
+                            @if($product->image)
+                                <img src="{{ $product->resolveMediaUrl($product->image, ['width' => 600, 'height' => 450, 'crop' => 'fill', 'quality' => 'auto', 'fetch_format' => 'auto']) }}"
+                                    alt="{{ $product->nama_produk }}"
+                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             @else
-                                <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa ' . $product->nama_produk . '. Tolong berikan saya detail produk ini?') }}"
-                                target="_blank"
-                                class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-10 py-5 rounded-2xl font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95">
-                                    <i data-lucide="message-circle" class="w-6 h-6"></i>
-                                    Sewa Sekarang
-                                </a>
+                                <img src="{{ asset('images/Rectangle24.png') }}" alt="{{ $product->nama_produk }}"
+                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             @endif
-                        </div>
-                    </div>
 
-                    {{-- Content --}}
-                    <div class="px-2 flex flex-col flex-1">
-                        <div class="flex-1">
-                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-[#0A4088] transition-colors line-clamp-1 mb-2">
-                                {{ $product->nama_produk }}
-                            </h3>
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-white/90 backdrop-blur-sm text-[#0A4088] text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-sm">
+                                    {{ $product->category->name }}
+                                </span>
+                            </div>
 
-                            <p class="text-gray-500 text-sm line-clamp-2 mb-4">
-                                {!! Str::limit($product->deskripsi, 40) !!}
-                            </p>
-
-                            <div class="flex flex-wrap gap-1.5">
-                                @foreach ($product->tags as $tag)
-                                    <a href="{{ url('/products?tag=' . $tag->slug) }}"
-                                       class="text-[10px] font-bold text-gray-400 bg-gray-50 px-2 py-1 rounded-md hover:bg-gray-100 hover:text-[#0A4088] transition-colors filter-link"
-                                       data-url="{{ url('/products?tag=' . $tag->slug) }}"
-                                       data-tag-slug="{{ $tag->slug }}">
-                                        #{{ $tag->name }}
+                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                                @if($product->category->slug === "jasa-fotografi-videografi")
+                                    <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik dengan jasa ' . $product->nama_produk . '. Mohon kirim detail layanan, harga, dan ketersediaannya.') }}"
+                                    target="_blank"
+                                    class="bg-white text-[#0A4088] px-5 py-2.5 rounded-full font-bold transform translate-y-4 md:group-hover:translate-y-0 transition-all duration-500 text-sm">
+                                        Sewa Sekarang
                                     </a>
-                                @endforeach
+                                @elseif($product->category->slug === "paket-kamera-jasa-fotografi-videografi")
+                                    <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa paket ' . $product->nama_produk . '. Mohon informasikan detail paket, ketersediaan, dan harga sewa.') }}"
+                                    target="_blank"
+                                    class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95 text-sm">
+                                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                        Pesan Paket
+                                    </a>
+                                @else
+                                    <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa ' . $product->nama_produk . '. Tolong berikan saya detail produk ini?') }}"
+                                    target="_blank"
+                                    class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95 text-sm">
+                                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                        Sewa Sekarang
+                                    </a>
+                                @endif
                             </div>
                         </div>
 
-                        <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between gap-3">
-                            <div>
-                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">
-                                    Harga Mulai dari
+                        <div class="px-1 flex flex-col flex-1">
+                            <div class="flex-1">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-[#0A4088] transition-colors line-clamp-1 mb-2">
+                                    {{ $product->nama_produk }}
+                                </h3>
+
+                                <p class="text-gray-500 text-sm line-clamp-2 mb-4">
+                                    {!! Str::limit(strip_tags($product->deskripsi), 40) !!}
                                 </p>
-                                <div class="flex items-baseline gap-1">
-                                    <span class="text-xl font-black text-[#0A4088] animate-pulse">
-                                        Rp{{ number_format($product->harga, 0, ',', '.') }}
-                                    </span>
-                                    <span class="text-xs text-gray-400 font-medium">/hari</span>
+
+                                <div class="flex flex-wrap gap-1.5">
+                                    @foreach ($product->tags as $tag)
+                                        <a href="{{ url('/products?tag=' . $tag->slug) }}"
+                                        class="text-[10px] font-bold text-gray-400 bg-gray-50 px-2 py-1 rounded-md hover:bg-gray-100 hover:text-[#0A4088] transition-colors filter-link"
+                                        data-url="{{ url('/products?tag=' . $tag->slug) }}"
+                                        data-tag-slug="{{ $tag->slug }}">
+                                            #{{ $tag->name }}
+                                        </a>
+                                    @endforeach
                                 </div>
                             </div>
 
-                            <a href="{{ route('products.show', $product->slug) }}"
-                               class="shrink-0 px-4 py-2 bg-[#0A4088]/5 text-[#0A4088] text-xs font-bold rounded-lg hover:bg-[#0A4088] hover:text-white transition-all duration-300">
-                                Lihat Detail
-                            </a>
+                            <div class="mt-4 pt-4 border-t border-gray-50 flex items-end justify-between gap-3 relative z-10">
+                                <div>
+                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">
+                                        Harga Mulai dari
+                                    </p>
+                                    <div class="flex items-baseline gap-1">
+                                        <span class="text-lg sm:text-xl font-black text-[#0A4088] animate-pulse">
+                                            Rp{{ number_format($product->harga, 0, ',', '.') }}
+                                        </span>
+                                        <span class="text-xs text-gray-400 font-medium">/hari</span>
+                                    </div>
+                                </div>
+
+                                <a href="{{ route('products.show', $product->slug) }}"
+                                class="shrink-0 px-3 sm:px-4 py-2 bg-[#0A4088]/5 text-[#0A4088] text-xs font-bold rounded-lg hover:bg-[#0A4088] hover:text-white transition-all duration-300 relative z-20">
+                                    Detail
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
-    </div>
-@endforeach
+    @endforeach
 @endif
