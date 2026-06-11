@@ -22,10 +22,10 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6 items-start">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6 items-stretch auto-rows-fr">
                 @foreach ($categoryProducts as $product)
-                    <div class="group relative bg-white rounded-3xl border border-gray-100 p-4 flex flex-col transition-all duration-500 hover:shadow-[0_20px_50px_rgba(8,112,184,0.1)] hover:-translate-y-2">
-                        <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-4 shrink-0">
+                    <div class="group relative bg-white rounded-3xl border border-gray-100 p-4 flex flex-col h-full transition-all duration-500 hover:shadow-[0_20px_50px_rgba(8,112,184,0.1)] hover:-translate-y-2">
+                        <div class="relative overflow-hidden rounded-2xl aspect-4/3 mb-4 shrink-0">
                             @if($product->image)
                                 <img src="{{ $product->resolveMediaUrl($product->image, ['width' => 600, 'height' => 450, 'crop' => 'fill', 'quality' => 'auto', 'fetch_format' => 'auto']) }}"
                                     alt="{{ $product->nama_produk }}"
@@ -51,15 +51,13 @@
                                 @elseif($product->category->slug === "paket-kamera-jasa-fotografi-videografi")
                                     <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa paket ' . $product->nama_produk . '. Mohon informasikan detail paket, ketersediaan, dan harga sewa.') }}"
                                     target="_blank"
-                                    class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95 text-sm">
-                                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                    class="bg-white text-[#0A4088] px-5 py-2.5 rounded-full font-bold transform translate-y-4 md:group-hover:translate-y-0 transition-all duration-500 text-sm">
                                         Pesan Paket
                                     </a>
                                 @else
                                     <a href="{{ route('whatsapp.rent') }}?text={{ urlencode('Halo Rentara, saya tertarik untuk menyewa ' . $product->nama_produk . '. Tolong berikan saya detail produk ini?') }}"
                                     target="_blank"
-                                    class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-bold shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1 active:scale-95 text-sm">
-                                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                    class="bg-white text-[#0A4088] px-5 py-2.5 rounded-full font-bold transform translate-y-4 md:group-hover:translate-y-0 transition-all duration-500 text-sm">
                                         Sewa Sekarang
                                     </a>
                                 @endif
@@ -67,16 +65,16 @@
                         </div>
 
                         <div class="px-1 flex flex-col flex-1">
-                            <div class="flex-1">
-                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-[#0A4088] transition-colors line-clamp-1 mb-2">
+                            <div class="flex-1 flex flex-col">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-[#0A4088] transition-colors line-clamp-1 mb-2 min-h-7">
                                     {{ $product->nama_produk }}
                                 </h3>
 
-                                <p class="text-gray-500 text-sm line-clamp-2 mb-4">
+                                <p class="text-gray-500 text-sm line-clamp-2 mb-4 min-h-10">
                                     {!! Str::limit(strip_tags($product->deskripsi), 40) !!}
                                 </p>
 
-                                <div class="flex flex-wrap gap-1.5">
+                                <div class="flex flex-wrap gap-1.5 min-h-7">
                                     @foreach ($product->tags as $tag)
                                         <a href="{{ url('/products?tag=' . $tag->slug) }}"
                                         class="text-[10px] font-bold text-gray-400 bg-gray-50 px-2 py-1 rounded-md hover:bg-gray-100 hover:text-[#0A4088] transition-colors filter-link"
