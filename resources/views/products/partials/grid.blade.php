@@ -44,7 +44,7 @@
 
                         {{-- Hover Quick Action --}}
                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="https://wa.me/6281938092473?text=Halooo Saya tertarik menyewa {{ $product->nama_produk }} dari websitemu. Tolong berikan saya detail barangnya?"
+                            <a href="{{ route('whatsapp.rent') }}?text=Halooo Saya tertarik menyewa {{ $product->nama_produk }} dari websitemu. Tolong berikan saya detail barangnya?"
                                target="_blank"
                                class="bg-white text-[#0A4088] px-6 py-2.5 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
                                 Sewa Sekarang
