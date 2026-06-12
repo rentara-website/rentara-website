@@ -70,7 +70,7 @@
                     </li>
                     <li class="flex items-center gap-3">
                         <div
-                            class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white fill-current"
                                 viewBox="0 0 24 24">
                                 <path

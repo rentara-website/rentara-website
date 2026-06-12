@@ -284,11 +284,25 @@
                                 </div>
 
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <a href="{{ route('whatsapp.rent', ['product' => $product->slug]) }}?text=Rental {{ urlencode($product->nama_produk) }} dari Rentara"
-                                       target="_blank"
-                                       class="bg-white text-[#0A4088] px-5 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-sm">
-                                        Sewa Sekarang
-                                    </a>
+                                    @if($product->category->slug === "jasa-fotografi-videografi")
+                                        <a href="{{ route('whatsapp.rent', ['product' => $product->slug]) }}?text=Saya tertarik untuk menyewa jasa dari {{ urlencode($product->nama_produk) }} dari Website Rentara. Tolong berikan detail jasa ini."
+                                        target="_blank"
+                                        class="bg-white text-[#0A4088] px-5 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-sm">
+                                            Sewa Sekarang
+                                        </a>
+                                    @elseif($product->category->slug === "paket-kamera-jasa-fotografi-videografi")
+                                        <a href="{{ route('whatsapp.rent', ['product' => $product->slug]) }}?text=Saya tertarik untuk menyewa paket {{ urlencode($product->nama_produk) }} ini. Tolong berikan detail paket ini."
+                                        target="_blank"
+                                        class="bg-white text-[#0A4088] px-5 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-sm">
+                                            Sewa Sekarang
+                                        </a>
+                                    @else
+                                        <a href="{{ route('whatsapp.rent', ['product' => $product->slug]) }}?text=Saya tertarik untuk menyewa {{ urlencode($product->nama_produk) }} ini. Tolong berikan detail produk ini."
+                                        target="_blank"
+                                        class="bg-white text-[#0A4088] px-5 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-sm">
+                                            Sewa Sekarang
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
 
